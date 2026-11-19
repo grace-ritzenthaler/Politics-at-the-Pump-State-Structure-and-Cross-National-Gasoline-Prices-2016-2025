@@ -199,6 +199,61 @@
   .vars .var:last-child { border-bottom: none; }
   .var h3 { font-size: 19px !important; }
   .var dl { font-size: 16.5px; grid-template-columns: 80px 1fr; }
+
+  /* ===== Phone navigation ===== */
+  .bbar, .totop { display: none; }
+  .swipe { display: none; }
+  @media (max-width: 860px) {
+    body { font-size: 17.5px; }
+    .topbar { padding: 0; background: #fff; box-shadow: 0 1px 0 var(--rule); border: none; }
+    .progress { height: 3px; background: transparent; }
+    .progress i { display: block; height: 100%; width: 0; background: var(--accent); }
+    .tb1 { display: flex; align-items: center; gap: 8px; padding: 8px 12px 6px; }
+    .tbhome { flex: none; width: 40px; height: 40px; display: grid; place-items: center; font-size: 24px; color: var(--accent); text-decoration: none; border: 1px solid var(--rule); }
+    .tabs { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--accent); }
+    .tabs a { text-align: center; padding: 9px 2px; font-size: 15.5px; color: var(--accent); text-decoration: none; }
+    .tabs a + a { border-left: 1px solid var(--accent); }
+    .tabs a.on { background: var(--accent); color: #fff; }
+    .secbtn { display: flex; align-items: center; gap: 8px; width: calc(100% - 24px); margin: 2px 12px 10px; padding: 10px 12px; background: var(--side); border: 1px solid var(--rule); font: 17px var(--serif); color: var(--ink); text-align: left; cursor: pointer; }
+    .secbtn .sn { color: var(--muted); font-size: 14px; }
+    .secbtn #sectitle { flex: 1; font-weight: 700; }
+    .secbtn .chev { color: var(--accent); transition: transform .15s; }
+    .secbtn[aria-expanded="true"] .chev { transform: rotate(180deg); }
+    .sheet { position: absolute; left: 0; right: 0; top: 100%; background: #fff; border-bottom: 2px solid var(--ink); box-shadow: 0 12px 30px rgba(0,0,0,.18); max-height: 70vh; overflow-y: auto; }
+    .sheet ul { list-style: none; margin: 0; padding: 4px 0; }
+    .sheet a { display: flex; gap: 12px; align-items: baseline; padding: 14px 20px; font-size: 18px; color: var(--ink); text-decoration: none; border-bottom: 1px solid #eee; }
+    .sheet a .num { color: var(--muted); font-size: 14px; min-width: 20px; }
+    .sheet a.active { color: var(--accent); font-weight: 700; box-shadow: inset 4px 0 0 var(--accent); }
+    .bbar { display: grid; grid-template-columns: 1fr auto 1fr; position: fixed; left: 0; right: 0; bottom: 0; z-index: 6; background: #fff; border-top: 1px solid var(--rule); padding: 6px 8px calc(6px + env(safe-area-inset-bottom)); }
+    .bbar button { background: none; border: none; font: 17px var(--serif); color: var(--accent); padding: 12px 8px; cursor: pointer; }
+    .bbar #bprev { text-align: left; } .bbar #bnext { text-align: right; }
+    .bbar #bpos { color: var(--muted); font-size: 15px; }
+    .bbar button:disabled { color: #bbb; }
+    .totop { display: grid; place-items: center; position: fixed; right: 14px; bottom: calc(70px + env(safe-area-inset-bottom)); z-index: 6; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--rule); background: #fff; color: var(--accent); font-size: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+    .totop[hidden] { display: none !important; }
+    #view-doc main { padding: 22px 18px calc(90px + env(safe-area-inset-bottom)); }
+    .pager { display: none !important; }
+    .pane h2 { font-size: 29px; }
+    .pane h3 { font-size: 21px; }
+    .pane p { text-align: left; }
+    .pane .where { display: none; }
+    .swipe { display: block; font-size: 14px; font-style: italic; color: var(--muted); margin: 6px 0 0; }
+    .swipe[hidden] { display: none !important; }
+    .tablewrap td:first-child, .tablewrap th:first-child { position: sticky; left: 0; background: #fff; z-index: 1; box-shadow: 1px 0 0 #e5e5e5; min-width: 150px; max-width: 170px; }
+    table { font-size: 15px; }
+    .var dl { grid-template-columns: 1fr; gap: 0; }
+    .var dt { margin-top: 6px; }
+    .home { padding: 36px 18px 40px; }
+    .home .lede { font-size: 17px; margin-bottom: 26px; padding-top: 18px; }
+    .home .aff { margin-bottom: 18px; }
+    .cards { gap: 12px; }
+    .card { padding: 16px 18px 14px; }
+    .card .ix { display: none; }
+    .card h2 { font-size: 22px; margin: 0 0 4px; }
+    .home h1 { font-size: 28px; }
+    .home .kicker { margin-bottom: 8px; }
+    .card p { font-size: 16px; margin: 0 0 8px; }
+  }
 </style>
 </head>
 <body>
@@ -219,10 +274,23 @@
 
 <div id="view-doc" hidden>
 <div class="topbar">
-  <div class="row"><p class="t" id="mtitle"></p><a href="#home">⌂ Home</a></div>
-  <label for="jump" style="position:absolute;left:-9999px">Go to section</label>
-  <select id="jump"></select>
+  <div class="progress"><i id="prog"></i></div>
+  <div class="tb1">
+    <a href="#home" class="tbhome" aria-label="Home">&#8962;</a>
+    <div class="tabs" role="tablist">
+      <a data-g="paper" href="#paper/abstract">Paper</a><a data-g="appendix" href="#appendix/appendix-a">Appendix</a><a data-g="codebook" href="#codebook">Codebook</a>
+    </div>
+  </div>
+  <button class="secbtn" id="secbtn" type="button" aria-expanded="false"><span class="sn" id="secnum"></span><span id="sectitle"></span><span class="chev">&#9662;</span></button>
+  <div class="sheet" id="sheet" hidden><ul id="sheetlist"></ul></div>
+  <select id="jump" hidden></select>
 </div>
+<div class="bbar" id="bbar">
+  <button id="bprev" type="button">&#8249; Previous</button>
+  <button id="bpos" type="button"></button>
+  <button id="bnext" type="button">Next &#8250;</button>
+</div>
+<button class="totop" id="totop" type="button" aria-label="Back to top" hidden>&#8593;</button>
 <div class="shell">
   <aside>
     <a class="homelink" href="#home">← Home</a>
@@ -1822,6 +1890,7 @@
       home.hidden = false; doc.hidden = true;
       document.title = 'Politics at the Pump · Grace Ritzenthaler';
       window.scrollTo(0, 0);
+      if (typeof mobileSync === 'function') mobileSync(null);
       return;
     }
     home.hidden = true; doc.hidden = false;
@@ -1833,7 +1902,6 @@
       sel.innerHTML = src ? src.innerHTML : '<option value="codebook">Codebook</option>';
       sel.style.display = list.length > 1 ? '' : 'none';
       document.getElementById('dtitle').textContent = NAMES[g];
-      document.getElementById('mtitle').textContent = NAMES[g];
     }
     panes.forEach(function (p) { p.hidden = p !== pane; });
     document.querySelectorAll('nav a').forEach(function (a) { a.classList.toggle('active', a.dataset.id === pane.dataset.id); });
@@ -1845,8 +1913,51 @@
     document.querySelector('.pager').style.display = list.length > 1 ? '' : 'none';
     document.title = pane.dataset.title + ' · Politics at the Pump';
     window.scrollTo(0, 0);
+    if (typeof mobileSync === 'function') mobileSync(pane);
   }
 
+
+  /* phone nav */
+  var tabs = document.querySelectorAll('.tabs a');
+  var secbtn = document.getElementById('secbtn'), sheet = document.getElementById('sheet'), sheetlist = document.getElementById('sheetlist');
+  var bprev = document.getElementById('bprev'), bnext = document.getElementById('bnext'), bpos = document.getElementById('bpos');
+  var totop = document.getElementById('totop'), prog = document.getElementById('prog');
+  var lastIn = {};
+  function closeSheet() { sheet.hidden = true; secbtn.setAttribute('aria-expanded', 'false'); }
+  secbtn.addEventListener('click', function () { var o = sheet.hidden; sheet.hidden = !o; secbtn.setAttribute('aria-expanded', String(o)); });
+  bpos.addEventListener('click', function () { window.scrollTo(0, 0); sheet.hidden = false; secbtn.setAttribute('aria-expanded', 'true'); });
+  sheetlist.addEventListener('click', function (e) { if (e.target.closest('a')) closeSheet(); });
+  document.addEventListener('click', function (e) { if (!sheet.hidden && !e.target.closest('.topbar')) closeSheet(); });
+  bprev.addEventListener('click', function () { prev.click(); });
+  bnext.addEventListener('click', function () { next.click(); });
+  totop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  tabs.forEach(function (a) { a.addEventListener('click', function (e) { var g = a.dataset.g; if (lastIn[g]) { e.preventDefault(); location.hash = lastIn[g]; } }); });
+  function onScroll() {
+    var h = document.documentElement.scrollHeight - innerHeight;
+    prog.style.width = (h > 0 ? Math.min(100, scrollY / h * 100) : 0) + '%';
+    totop.hidden = doc.hidden || scrollY < 900;
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  function mobileSync(pane) {
+    closeSheet();
+    if (!pane) { totop.hidden = true; return; }
+    var g = pane.dataset.group, list = inGroup(g), i = list.indexOf(pane);
+    lastIn[g] = pane.dataset.id;
+    tabs.forEach(function (a) { a.classList.toggle('on', a.dataset.g === g); });
+    secbtn.style.display = list.length > 1 ? '' : 'none';
+    document.getElementById('sectitle').textContent = pane.dataset.title;
+    document.getElementById('secnum').textContent = String(i + 1).padStart(2, '0');
+    sheetlist.innerHTML = document.getElementById('nav-' + g).innerHTML;
+    document.getElementById('bbar').style.display = list.length > 1 ? '' : 'none';
+    bprev.disabled = i <= 0; bnext.disabled = i >= list.length - 1;
+    bpos.textContent = (i + 1) + ' of ' + list.length;
+    pane.querySelectorAll('.tablewrap').forEach(function (w) {
+      var hint = w.nextElementSibling && w.nextElementSibling.classList.contains('swipe') ? w.nextElementSibling : null;
+      if (!hint) { hint = document.createElement('p'); hint.className = 'swipe'; hint.textContent = 'Swipe the table sideways to see every column →'; w.after(hint); }
+      hint.hidden = w.scrollWidth <= w.clientWidth + 2;
+    });
+    onScroll();
+  }
   window.addEventListener('hashchange', route);
   sel.addEventListener('change', function () { location.hash = sel.value; });
   prev.addEventListener('click', function () { location.hash = prev.dataset.to; });
