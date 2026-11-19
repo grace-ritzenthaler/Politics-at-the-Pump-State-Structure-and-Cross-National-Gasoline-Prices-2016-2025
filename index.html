@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Politics at the Pump · Grace Ritzenthaler</title>
+<meta name="description" content="State Structure and Cross-National Gasoline Prices, 2016–2025. PLS 591 capstone, Creighton University.">
+<style>
+  :root {
+    --ink: #1d2327;
+    --muted: #5d676e;
+    --rule: #dfe3e6;
+    --paper: #fbfaf7;
+    --side: #f2f0ea;
+    --accent: #0f5c63;
+    --accent-soft: #e2eeee;
+    --amber: #b8741a;
+    --serif: "Charter", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--serif); font-size: 18px; line-height: 1.65; }
+
+  /* Layout */
+  .shell { display: grid; grid-template-columns: 300px 1fr; min-height: 100vh; }
+  aside { background: var(--side); border-right: 1px solid var(--rule); position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 32px 22px; font-family: var(--sans); }
+  main { padding: 48px clamp(20px, 6vw, 80px) 80px; }
+  .col { max-width: 720px; margin: 0 auto; }
+
+  /* Title block */
+  .kicker { font: 600 11px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin: 0 0 12px; }
+  .title { font: 700 21px/1.25 var(--serif); margin: 0 0 6px; }
+  .byline { font-size: 13px; color: var(--muted); margin: 0 0 26px; line-height: 1.5; }
+
+  /* Nav */
+  nav ul { list-style: none; margin: 0; padding: 0; }
+  nav .grp { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 18px 0 6px 10px; }
+  nav .sep { height: 1px; background: var(--rule); margin: 12px 10px; }
+  nav a { display: flex; gap: 10px; align-items: baseline; padding: 7px 10px; border-radius: 6px; color: var(--ink); text-decoration: none; font-size: 14.5px; line-height: 1.3; }
+  nav a:hover { background: #e7e4dc; }
+  nav a.active { background: var(--accent); color: #fff; }
+  nav a .num { font-variant-numeric: tabular-nums; font-size: 11px; color: var(--muted); min-width: 16px; }
+  nav a.active .num { color: #cfe3e3; }
+
+  /* Mobile bar */
+  .topbar { display: none; }
+  @media (max-width: 860px) {
+    body { font-size: 17px; }
+    .shell { display: block; }
+    aside { display: none; }
+    .topbar { display: block; position: sticky; top: 0; z-index: 5; background: var(--side); border-bottom: 1px solid var(--rule); padding: 10px 16px 12px; font-family: var(--sans); }
+    .topbar .t { font: 700 14px/1.3 var(--serif); margin: 0 0 8px; }
+    .topbar select { width: 100%; font: 15px var(--sans); padding: 9px 10px; border: 1px solid #c9ced2; border-radius: 8px; background: #fff; color: var(--ink); }
+    main { padding: 28px 18px 60px; }
+  }
+
+  /* Content */
+  .pane h2 { font: 700 34px/1.15 var(--serif); margin: 0 0 6px; letter-spacing: -.01em; }
+  .pane .where { font: 600 11px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin: 0 0 14px; }
+  .pane .subtitle { font-style: italic; color: var(--muted); margin-top: -2px; }
+  .pane h3 { font: 700 22px/1.3 var(--serif); margin: 40px 0 10px; }
+  .pane h4 { font: 600 13px/1.3 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 32px 0 8px; }
+  .pane p { margin: 0 0 1.05em; }
+  .pane blockquote { margin: 0; padding: 0; }
+  .pane blockquote p { font-size: 1.05em; }
+  .hyp { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 12px 16px; border-radius: 0 6px 6px 0; margin: 28px 0 14px !important; }
+  .equation { font-family: var(--serif); font-size: 16px; line-height: 2; background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 14px 18px; margin: 4px 0 20px; overflow-x: auto; }
+  .equation sub { font-size: .7em; }
+
+  /* Tables */
+  .caption { font: 600 14.5px/1.4 var(--sans); margin: 34px 0 8px !important; }
+  .tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; background: #fff; border: 1px solid var(--rule); border-radius: 8px; margin: 0 0 8px; }
+  table { border-collapse: collapse; width: 100%; font: 13.5px/1.35 var(--sans); font-variant-numeric: tabular-nums; }
+  th, td { padding: 7px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid #eef0f2; }
+  thead th { background: #f5f6f7; font-weight: 600; border-bottom: 1px solid var(--rule); }
+  td p, th p { margin: 0 !important; }
+  td.n, th.n { text-align: right; white-space: nowrap; }
+  td:first-child { min-width: 170px; }
+  td em u, td u em { text-decoration: none; font-style: normal; font-weight: 600; color: var(--accent); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+  td:has(em u), td:has(u em) { background: #fafbfb; padding-top: 12px; }
+  .note { font: 12.5px/1.5 var(--sans); color: var(--muted); }
+  colgroup { display: none; }
+
+  /* Pager */
+  .pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--rule); font-family: var(--sans); }
+  .pager button { flex: 1; max-width: 48%; text-align: left; background: #fff; border: 1px solid var(--rule); border-radius: 10px; padding: 12px 14px; cursor: pointer; color: var(--ink); font: inherit; }
+  .pager button:hover { border-color: var(--accent); }
+  .pager button.next { text-align: right; margin-left: auto; }
+  .pager small { display: block; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+  .pager span { font-size: 15px; font-weight: 600; }
+  .pager button[hidden] { display: none; }
+  a { color: var(--accent); word-break: break-word; }
+
+  /* Home */
+  .home { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 56px 20px; }
+  .home .inner { max-width: 960px; width: 100%; }
+  .home .kicker { font-size: 12px; }
+  .home h1 { font: 700 clamp(30px, 5vw, 48px)/1.12 var(--serif); margin: 0 0 14px; letter-spacing: -.015em; max-width: 820px; }
+  .home .by { font: 15px/1.5 var(--sans); color: var(--muted); margin: 0 0 22px; }
+  .home .lede { font-size: 18px; max-width: 700px; color: #3a4349; margin: 0 0 40px; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .card { display: flex; flex-direction: column; text-decoration: none; color: var(--ink); background: #fff; border: 1px solid var(--rule); border-radius: 14px; padding: 24px 22px 20px; transition: border-color .15s, transform .15s, box-shadow .15s; }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(15,92,99,.08); }
+  .card .ix { font: 600 11px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; }
+  .card h2 { font: 700 26px/1.15 var(--serif); margin: 0 0 10px; }
+  .card p { font: 14.5px/1.5 var(--sans); color: var(--muted); margin: 0 0 18px; flex: 1; }
+  .card .go { font: 600 14px var(--sans); color: var(--accent); }
+  @media (max-width: 860px) { .cards { grid-template-columns: 1fr; } .home { align-items: flex-start; } .home .lede { font-size: 16.5px; margin-bottom: 28px; } }
+
+  .homelink { display: inline-flex; align-items: center; gap: 6px; font: 600 13px var(--sans); color: var(--accent); text-decoration: none; margin: 0 0 22px; }
+  .homelink:hover { text-decoration: underline; }
+  .doclabel { font: 700 24px/1.2 var(--serif); margin: 0 0 18px; }
+  .topbar .row { display: flex; align-items: center; justify-content: space-between; margin: 0 0 8px; }
+  .topbar .row a { font: 600 13px var(--sans); color: var(--accent); text-decoration: none; }
+  .topbar .row .t { margin: 0; }
+  .vars { display: grid; gap: 12px; margin-top: 24px; }
+  .var { background: #fff; border: 1px solid var(--rule); border-left: 4px solid #b9c2c7; border-radius: 10px; padding: 16px 18px; font-family: var(--sans); }
+  .var.dv { border-left-color: var(--amber); }
+  .var.hv { border-left-color: var(--accent); }
+  .var.alt { border-left-color: #8a8fb3; }
+  .var .vh { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+  .var h3 { font: 700 18px/1.3 var(--serif) !important; margin: 0 !important; }
+  .var .tag { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .var.dv .tag { color: var(--amber); } .var.hv .tag { color: var(--accent); }
+  .var dl { display: grid; grid-template-columns: 70px 1fr; gap: 4px 12px; margin: 0; font-size: 14.5px; line-height: 1.45; }
+  .var dt { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; padding-top: 2px; }
+  .var dd { margin: 0; }
+  .placeholder { background: #fff; border: 1px dashed #c4ccd0; border-radius: 12px; padding: 28px; color: var(--muted); font-family: var(--sans); font-size: 15px; }
+
+  /* ===== Academic / symposium theme ===== */
+  :root {
+    --serif: "Times New Roman", Times, "Liberation Serif", serif;
+    --sans: "Times New Roman", Times, "Liberation Serif", serif;
+    --ink: #111;
+    --muted: #555;
+    --rule: #cfcfcf;
+    --paper: #ffffff;
+    --side: #f6f6f4;
+    --accent: #1b365d;
+    --accent-soft: transparent;
+    --amber: #1b365d;
+  }
+  body { font-size: 19px; line-height: 1.6; }
+  .kicker, .pane .where, .card .ix, nav .grp, .var .tag, .var dt, .pager small, .pane h4 {
+    font-family: var(--serif) !important; font-weight: 400 !important; font-variant: small-caps; text-transform: lowercase !important; letter-spacing: .06em !important; font-size: 15px !important; color: var(--muted) !important;
+  }
+  .pane h2 { font-weight: 700; font-size: 36px; padding-bottom: 12px; border-bottom: 1px solid var(--ink); margin-bottom: 22px; }
+  .pane h3 { font-weight: 700; font-size: 23px; }
+  .pane h4 { color: var(--ink) !important; font-size: 17px !important; font-style: italic; font-variant: normal; text-transform: none !important; letter-spacing: 0 !important; }
+  .pane p { text-align: justify; hyphens: auto; }
+  .pane .subtitle { text-align: left; }
+  aside { border-right: 1px solid var(--rule); }
+  nav a { font-size: 16.5px; border-radius: 0; }
+  nav a:hover { background: #ebebe7; }
+  nav a.active { background: transparent; color: var(--accent); font-weight: 700; box-shadow: inset 3px 0 0 var(--accent); }
+  nav a .num { font-size: 13px; }
+  nav a.active .num { color: var(--accent); }
+  .homelink, .topbar .row a { font-size: 15px; font-weight: 400; }
+  .doclabel { font-size: 22px; }
+  .title { font-size: 20px; }
+  .byline { font-size: 15px; }
+
+  .hyp { background: none; border-left: 2px solid var(--accent); border-radius: 0; padding: 4px 0 4px 18px; text-align: left !important; }
+  .equation { border-radius: 0; border: none; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: none; text-align: center; font-size: 18px; }
+
+  /* Booktabs-style tables */
+  .caption { font-family: var(--serif) !important; font-weight: 700; font-size: 16px; text-align: left !important; }
+  .tablewrap { background: none; border: none; border-radius: 0; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+  table { font-family: var(--serif); font-size: 15.5px; }
+  th, td { border-bottom: none; padding: 5px 12px; }
+  thead th { background: none; border-bottom: 1px solid var(--ink); font-weight: 700; }
+  td:has(em u), td:has(u em) { background: none; padding-top: 14px; }
+  td em u, td u em { font-family: var(--serif); font-size: 15.5px; font-style: italic; font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--ink); text-decoration: underline; }
+  .note { font-size: 14px; text-align: left !important; }
+  td p, th p { text-align: inherit !important; hyphens: none; }
+  td.n, th.n { text-align: center; }
+
+  .pager button { border-radius: 0; font-family: var(--serif); }
+  .pager span { font-size: 17px; }
+  .topbar select { font-family: var(--serif); font-size: 16px; border-radius: 0; }
+  .topbar .t { font-size: 16px; }
+
+  /* Home */
+  .home .inner { text-align: center; max-width: 1000px; }
+  .home h1 { font-size: clamp(30px, 4.6vw, 46px); margin: 0 auto 18px; max-width: 900px; letter-spacing: 0; }
+  .home .by { font-size: 19px; color: var(--ink); margin-bottom: 4px; }
+  .home .aff { font-size: 17px; color: var(--muted); font-style: italic; margin: 0 0 26px; }
+  .home .lede { margin: 0 auto 44px; font-size: 18.5px; max-width: 680px; padding-top: 24px; border-top: 1px solid var(--rule); }
+  .card { text-align: left; border-radius: 0; border: 1px solid var(--rule); border-top: 3px solid var(--accent); padding: 22px 22px 18px; }
+  .card:hover { transform: none; box-shadow: none; border-color: var(--rule); border-top-color: var(--accent); background: #fafaf8; }
+  .card h2 { font-size: 25px; }
+  .card p { font-family: var(--serif); font-size: 16.5px; }
+  .card .go { font-family: var(--serif); font-size: 16px; font-weight: 400; font-style: italic; }
+
+  /* Codebook */
+  .var { border-radius: 0; border: none; border-bottom: 1px solid var(--rule); border-left: none !important; padding: 16px 0; background: none; font-family: var(--serif); }
+  .vars { gap: 0; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+  .vars .var:last-child { border-bottom: none; }
+  .var h3 { font-size: 19px !important; }
+  .var dl { font-size: 16.5px; grid-template-columns: 80px 1fr; }
+</style>
+</head>
+<body>
+<div id="view-home" class="home" hidden>
+  <div class="inner">
+    <p class="kicker">PLS 591 · Senior Capstone</p>
+    <h1>Politics at the Pump: State Structure and Cross-National Gasoline Prices, 2016–2025</h1>
+    <p class="by">Grace Ritzenthaler</p>
+    <p class="aff">Creighton University · Fall 2026</p>
+    <p class="lede">Why do consumers in some countries pay many times more for gasoline than consumers in others? This project examines how state capacity and government shielding shape retail gasoline prices across 114 countries.</p>
+    <div class="cards">
+      <a class="card" href="#paper/abstract"><span class="ix">01</span><h2>The Paper</h2><p>The full text, from the abstract through the conclusion, with references.</p><span class="go">Read the paper →</span></a>
+      <a class="card" href="#appendix/appendix-a"><span class="ix">02</span><h2>The Appendix</h2><p>Appendix A: robustness checks, diagnostics and correlations. Appendix B: variables tested separately and additional hypotheses.</p><span class="go">Open the appendix →</span></a>
+      <a class="card" href="#codebook"><span class="ix">03</span><h2>The Codebook</h2><p>How each of the 17 variables is measured and where the data come from.</p><span class="go">View the codebook →</span></a>
+    </div>
+  </div>
+</div>
+
+<div id="view-doc" hidden>
+<div class="topbar">
+  <div class="row"><p class="t" id="mtitle"></p><a href="#home">⌂ Home</a></div>
+  <label for="jump" style="position:absolute;left:-9999px">Go to section</label>
+  <select id="jump"></select>
+</div>
+<div class="shell">
+  <aside>
+    <a class="homelink" href="#home">← Home</a>
+    <p class="kicker">Politics at the Pump</p>
+    <p class="doclabel" id="dtitle"></p>
+    <nav aria-label="Sections">
+      <ul id="nav-paper" hidden>
+<li><a href="#paper/abstract" data-id="paper/abstract"><span class="num">01</span>Abstract</a></li>
+<li><a href="#paper/introduction" data-id="paper/introduction"><span class="num">02</span>Introduction</a></li>
+<li><a href="#paper/literature-review" data-id="paper/literature-review"><span class="num">03</span>Literature Review</a></li>
+<li><a href="#paper/hypotheses" data-id="paper/hypotheses"><span class="num">04</span>Hypotheses</a></li>
+<li><a href="#paper/data-and-methods" data-id="paper/data-and-methods"><span class="num">05</span>Data and Methods</a></li>
+<li><a href="#paper/results" data-id="paper/results"><span class="num">06</span>Results</a></li>
+<li><a href="#paper/findings" data-id="paper/findings"><span class="num">07</span>Findings</a></li>
+<li><a href="#paper/conclusion" data-id="paper/conclusion"><span class="num">08</span>Conclusion</a></li>
+<li><a href="#paper/references" data-id="paper/references"><span class="num">09</span>References</a></li>
+      </ul>
+      <ul id="nav-appendix" hidden>
+<li><a href="#appendix/appendix-a" data-id="appendix/appendix-a"><span class="num">01</span>Appendix A</a></li>
+<li><a href="#appendix/appendix-b" data-id="appendix/appendix-b"><span class="num">02</span>Appendix B</a></li>
+      </ul>
+      <ul id="nav-codebook" hidden>
+        <li><a href="#codebook" data-id="codebook"><span class="num">01</span>Codebook</a></li>
+      </ul>
+    </nav>
+    <p class="byline" style="margin-top:28px">Grace Ritzenthaler<br>Creighton University · Fall 2026</p>
+  </aside>
+  <main>
+    <div class="col">
+<section data-id="paper/abstract" class="pane" data-group="paper" data-title="Abstract" hidden>
+<h2>Abstract</h2>
+<blockquote>
+<p>Why do consumers in some countries pay many times more for gasoline than consumers in others? This paper examines how state capacity and government shielding shape the retail price of gasoline across 114 countries from 2016 to 2025. Using Prais–Winsten regression with panel-corrected standard errors, it finds that the price consumers pay is shaped most by who owns the oil sector and by the type and quality of government. Countries with a national oil company pay about 26 cents less per liter than comparable countries without one. More effective governments charge consumers more, about 5 cents per liter for each 10-point increase in government effectiveness, consistent with the view that capable states tax fuel rather than subsidize it, and more democratic governments charge more as well. Price regulation lowers prices on its own, but its effect weakens once regional differences in fuel policy are taken into account. Currency depreciation lowers the dollar price of fuel, while elections, net importer status, and currency pegs have no independent effect. The findings suggest that state ownership of the oil sector, rather than formal price controls, is the most durable source of cheap fuel.</p>
+</blockquote>
+</section>
+<section data-id="paper/introduction" class="pane" data-group="paper" data-title="Introduction" hidden>
+<h2>Introduction</h2>
+<p>The price of gasoline has returned to the center of economic and political debate. After a decade of volatile world oil markets, governments turn to fuel taxes, subsidies, and price controls as tools of revenue, protection, and political survival, and the price consumers pay at the pump now ranges from about 12 cents to more than two dollars per liter from one country to another (Ross, Hazlett, and Mahdavi 2017). The question that follows is why. A large body of research explains how pump prices move when world oil prices change, finding that they rise faster than they fall and adjust over weeks or months (Borenstein, Cameron, and Gilbert 1997; Kpodar and Abdallah 2017). While the mechanism of that change may be understood from a global perspective, far less is understood on the difference of price levels from one country to another. This paper asks: what explains cross-national variation in the price consumers pay for gasoline?</p>
+<p>The question is new in two respects. First, research on fuel prices is largely concerned with movement rather than level, and it treats the pump price as the product of market forces: world crude costs, competition, and the pricing choices of refiners and retailers (Borenstein, Cameron, and Gilbert 1997; Weyl and Fabinger 2013). The one large cross-national study of pass-through finds that political factors have no short-run effect on how world prices reach the pump (Kpodar and Imam 2021). Second, the cross-national research that does compare price levels has studied one channel at a time, asking either why governments subsidize gasoline or why they tax it, but not how state capacity, government shielding, and the structure of the fuel market and currency work together (Cheon, Urpelainen, and Lackner 2013; Hammar, Löfgren, and Sterner 2004). It is understood that a world oil price shock arrives from outside the country, but the price level at the pump itself doesn’t. Instead, those prices are set over years, through policies a government writes, collects, and can choose to offset. The difference between those three mechanisms is the reason to study politics in relation to shaping the price level, even where it does not shape the short-run pass-through of world prices.</p>
+<p>This paper treats the path from the world price of gasoline to the pump price as a sequence of political and economic steps. The world price of gasoline, set where global supply meets global demand, determines the cost of the fuel itself. A government then decides how much to add to that cost through taxation, a choice that depends on its capacity to collect revenue at all (Besley and Persson 2009, 2014). The government may also choose to subtract from it, holding prices down by decree, directing state-owned firms to absorb costs, or timing relief around the moments when voters are watching (Cheon, Lackner, and Urpelainen 2015; Klomp 2020). Beneath these steps lie the structural conditions of each country's fuel market and currency, which determine what imported fuel costs in local terms and what consumers pay when that price is measured in dollars (Goldberg and Knetter 1997; Gopinath et al. 2020). At each step the state can widen or narrow the gap between the world price and the price consumers pay. In this sense, that gap is a measure of what the state is able to, and chooses to carry out (Fukuyama 2004).</p>
+<p>Gasoline is a useful place to study this gap. It is a homogeneous and widely traded product with a public world benchmark price, so the share of the pump price that comes from policy rather than from the cost of the fuel can be measured with unusual precision. It is also one of the most politically sensitive prices consumers face. Governments of every type manage fuel prices closely, in part because they fear the unrest and electoral costs that rising fuel prices can bring (Kim and Urpelainen 2016; Klomp 2020). Nearly every country publishes a retail gasoline price, meaning gasoline offers a comparable outcome across very different states.</p>
+<p>The answer to the question of price level differneces for three reasons. First, it matters for policy. Fuel subsidies cost governments hundreds of billions of dollars each year, while fuel taxes are among the most cost-effective tools for raising revenue and limiting emissions, so a government that does not understand what sets its pump price cannot anticipate the fiscal or environmental effects of its own choices (Coady et al. 2017; Sterner 2007). Second, it matters for those who bear the costs and benefits of fuel policy. Low prices benefit the households that consume the most fuel, drain the treasury, and are difficult to reverse once consumers come to expect them (Fattouh and El-Katiri 2013; Hammar, Löfgren, and Sterner 2004). Third, it matters for the study of the state. The pump price turns a familiar economic quantity into an observable, price-based measure of the distance between what governments decide and what they deliver, a distance that political scientists usually measure through expert surveys and perception indices (Kaufmann, Kraay, and Mastruzzi 2010; Besley and Persson 2011). This makes it uniquely useful in studying the efficacy of government types and the priorities of those structures, as well.</p>
+<p>Using a panel of 114 countries from 2016 to 2025, this paper finds that the price consumers pay is shaped most by who owns the oil sector and by the type and quality of government. Countries with a national oil company pay about 26 cents less per liter than comparable countries without one, while more democratic and more effective governments charge consumers more. Elections, trade position, and currency pegs show no independent effect, and the effect of price regulation weakens once regional differences in fuel policy are taken into account.</p>
+</section>
+<section data-id="paper/literature-review" class="pane" data-group="paper" data-title="Literature Review" hidden>
+<h2>Literature Review</h2>
+<p>The dependent variable in this study is the price of gasoline, defined as the retail price per liter that consumers pay at the pump, measured in US dollars. The literature agrees on the basics: the pump price is the world cost of the fuel plus whatever taxes, margins, and subsidies are added or subtracted before it reaches the consumer (Coady et al. 2017; Ross, Hazlett, and Mahdavi 2017). It disagrees, however, about how to measure it and what drives it. Much of the fuel price research measures prices in local currency and studies how they change after a shock, finding that world crude prices reach the pump unevenly and over weeks or months (Borenstein, Cameron, and Gilbert 1997; Kpodar and Abdallah 2017). Work that compares levels across countries instead measures prices in a common currency and treats the gap between the pump price and the world benchmark as a measure of net taxation or subsidy (Cheon, Urpelainen, and Lackner 2013; Ross, Hazlett, and Mahdavi 2017). A second disagreement concerns the source of that gap. One line of work treats it as the product of market structure and competition (Weyl and Fabinger 2013; Marion and Muehlegger 2011); another treats it as a policy choice shaped by fiscal need, political pressure, and resource wealth (Hammar, Löfgren, and Sterner 2004; Cheon, Urpelainen, and Lackner 2013). This paper measures the price of gasoline in US dollars per liter, averaged over each year, rather than in local currency or adjusted for purchasing power, because the question concerns what consumers pay compared across countries (Burke and Nishitateno 2013). Converting every price to a common currency makes countries directly comparable, but it comes at a cost: dollar prices move with exchange rates as well as with fuel policy, so a country’s pump price can fall in dollar terms even when nothing about its taxes or subsidies has changed. This paper accounts for this by controlling for changes in each country’s exchange rate against the US dollar.</p>
+<p>The first concept is state capacity, measured here through a government effectiveness variable. Scholars broadly agree that state capacity is a government's ability to plan and carry out policy, and to enforce the laws it passes (Fukuyama 2004). They also agree that fiscal, legal, and administrative capacity tend to be built together rather than separately (Besley and Persson 2009, 2011). There is a disagreement on how to measure it, however. Some studies use broad governance indices; others use corruption indices or measures specific to a single agency, such as the customs service, and these are not interchangeable predictors of the same outcome (Kellenberg and Levinson 2019; World Bank 2023). Broad measures of governance also carry measurement error and are closely tied to national income. Their anchoring to income raises the concern that they capture how rich a country is rather than how well it is governed (Kaufmann and Kraay 2002; Kaufmann, Kraay, and Mastruzzi 2010), a concern that has led some scholars to build measures designed to separate capacity from development and regime type (Hanson and Sigman 2021). This paper defines government effectiveness as the quality of public administration and the state's capacity to implement policy, as captured by the Worldwide Governance Indicators. The broad measure is preferred because the theory requires a state that can both collect revenue on fuel and administer the programs that would replace fuel subsidies, two tasks a single agency measure would only partly capture.</p>
+<p>The second concept is government shielding, defined as the tools a government can use to keep the cost of fuel from reaching consumers. This idea is measured through three variables, the first being price regulation. Researchers agree that governments that set or cap retail fuel prices control how much of any cost increase reaches consumers, and that prices follow world costs more closely where pricing is flexible (Kpodar and Imam 2021). Studies differ in whether they classify pricing regimes as fixed country traits or as policies that change over time, because pricing policy both advances and backslides within countries (Ross, Hazlett, and Mahdavi 2017), the time-varying approach is preferred where data allow. Data on pricing regimes are available for only part of the period studied, so this paper codes price regulation as whether a country regulated retail fuel prices at any point in that window and treats it as a stable trait. The second idea is state ownership of the oil sector. There is broad agreement that state oil companies serve political as well as commercial goals and are used to hold down domestic fuel prices (Victor, Hults, and Thurber 2012; Ichsan, Lockwood, and Ramadhani 2022). Some work measures this through the state's share of refining capacity, which captures how much of the market the government can direct; most cross-national work measures it through the presence of a national oil company (Cheon, Lackner, and Urpelainen 2015). This paper follows the second approach, because it is available for every country studied. The third and final government shielding concept is government type, where the literature is most divided. One line of work finds that autocracies, which depend on the support of urban populations, subsidize petroleum products more than democracies (Kim and Urpelainen 2016). Another finds that democracies, and especially majoritarian democracies, favor consumers over producers and lower consumer prices (Rogowski and Kayser 2002; Chang, Kayser, and Rogowski 2008; Chang et al. 2011; Weinberg 2012; Baker and Wojcik 2019). A third finds that political leadership has little effect on fuel pricing at all (Martinez-Alvarez et al. 2022; Kpodar and Imam 2021), while recent work suggests that democracy lowers fuel price controls only when it is paired with institutional capacity (McAlexander, Yang, and Urpelainen 2025). These findings may be reconciled if different regimes shield consumers through different tools. This paper measures government type with a continuous electoral democracy index rather than a democracy/autocracy dichotomy, so that differences of degree are not hidden, and uses a four-category regime classification as an alternative.</p>
+<p>In a competitive market with no government intervention, the pump price of gasoline should equal the world cost of the fuel plus the costs of refining, transport, and retail, and should therefore be roughly the same across countries once converted to a common currency (Weyl and Fabinger 2013; Marion and Muehlegger 2011). Differences in price levels must then come from something that interrupts the path from the world market to the pump. The literature points to two political interruptions. First, the state may add to the price by taxing fuel, which depends on its capacity to collect revenue. Second, the government may subtract from the price by shielding consumers through price regulation, state-owned oil companies, or the incentives that come with its type of government. A third, economic interruption, the structure of the fuel market and the currency, can also change what imported fuel costs consumers before any policy is applied; this paper accounts for it through control variables and the additional variables reported in Appendix B. Because the price level is set over years through policies the government controls, the political interruptions should matter more for the level of the price than for its short-run response to world price shocks, which arrive regardless of what the state does (Kpodar and Imam 2021).</p>
+<p>Government effectiveness is expected to be the strongest of these explanations, and it is expected to operate through taxation. Fuel is one of the easiest goods for a government to tax, because it passes through a small number of refineries, ports, and wholesalers, and effective states are better able to collect what they levy (Besley and Persson 2009, 2014). Effective states also have other ways to support poor households, such as targeted transfers, and so have less reason to hold the price of fuel down for everyone (McAlexander, Yang, and Urpelainen 2025; Cheon, Urpelainen, and Lackner 2013). Where the state is weak, it collects less from fuel and relies more on cheap fuel as a form of social support, so prices should be lower. The price of gasoline should therefore rise with government effectiveness.</p>
+<p>Price regulation is expected to be the strongest of the shielding variables. Where the government sets the retail price, it decides directly how much of the world cost consumers pay, and the price can sit well below world levels even when the fuel itself is fully imported (Kpodar and Imam 2021; Ross, Hazlett, and Mahdavi 2017). This is also why price regulation is essential to the model. Without it, a government that holds prices down by decree would look the same as a government that simply taxes fuel lightly. Because capable states also regulate prices, the two must be distinguished rather than conflated (Cheon, Urpelainen, and Lackner 2013).</p>
+<p>State ownership of the oil sector offers a second route to shielding. State owned oil companies can be instructed to absorb cost increases and hold prices below cost, as occurred when state marketing companies ran losses under administered pricing (Victor, Hults, and Thurber 2012; Ichsan, Lockwood, and Ramadhani 2022). Cross-national evidence finds that national oil companies halve the effect of oil price increases on domestic gasoline prices, and that this holds even among oil importers with capable bureaucracies (Cheon, Lackner, and Urpelainen 2015). The variable is viable because it captures shielding that operates through firms rather than through formal price rules.</p>
+<p>Government type is expected to be the weakest and most contested of the shielding variables. Autocrats, fearing urban unrest, subsidize petroleum products more than democrats do (Kim and Urpelainen 2016). Yet democracies are also found to favor consumers, and democratization lowers consumer prices in part through trade policy (Chang et al. 2011; Rogowski and Kayser 2002; Weinberg 2012; Baker and Wojcik 2019). Other work finds little effect of political leadership on fuel pricing at all (Martinez-Alvarez et al. 2022). The variable is retained because the shielding literature consistently points to less democratic regimes as the most active subsidizers of gasoline, but its effect may be absorbed by the more direct shielding tools above.</p>
+</section>
+<section data-id="paper/hypotheses" class="pane" data-group="paper" data-title="Hypotheses" hidden>
+<h2>Hypotheses</h2>
+<p class="hyp"><em>Hypothesis 1: Given greater government effectiveness, there will be an increase in the price of gasoline.</em></p>
+<p>The first hypothesis concerns state capacity and follows the taxation mechanism. A state with weak administration collects less revenue of every kind, and fuel taxes are among the first a weak state gives up or never builds. Weak states also lack the tools to support poor households directly, so they rely on cheap fuel as a broad form of social support. As government effectiveness rises, more of the levy on fuel is collected and less of the price is held down, so the price of gasoline should rise.</p>
+<p class="hyp"><em>Hypothesis 2: Given government-regulated fuel prices, we expect a decrease in the price of gasoline.</em></p>
+<p>The second hypothesis concerns the most direct form of government shielding. Where the government fixes retail fuel prices or adjusts them through a formula it controls, the pump price responds to political decisions rather than to world costs. A government that does not wish consumers to bear the full cost of fuel can simply decline to raise the regulated price. The price of gasoline should therefore be lower under regulated pricing than under free pricing.</p>
+<p class="hyp"><em>Hypothesis 3: Given state ownership of the oil sector, we expect a decrease in the price of gasoline.</em></p>
+<p>The third hypothesis concerns shielding through state-owned firms. When the state owns an oil company, it can direct that firm to absorb costs rather than pass them on, covering its losses through the budget. This allows the government to shield consumers without formally controlling prices. The price of gasoline should therefore be lower where the state owns a national oil company.</p>
+<p class="hyp"><em>Hypothesis 4: Given a less democratic government type, we expect a decrease in the price of gasoline.</em></p>
+<p>The fourth hypothesis concerns the type of government. Autocratic leaders depend on keeping order in the cities, where rising fuel prices can spark unrest, and electoral autocracies face the added pressure of periodic elections without the full accountability of democracy. These regimes have both the motive and the means to keep fuel prices low. The price of gasoline should therefore be lower under a less democratic government. Because some evidence finds that democracies also favor consumers, this hypothesis is held with less confidence than the others.</p>
+</section>
+<section data-id="paper/data-and-methods" class="pane" data-group="paper" data-title="Data and Methods" hidden>
+<h2>Data and Methods</h2>
+<p>Data for this study are based on a panel of countries observed each year from 2016 to 2025. The data were first assembled as a monthly panel covering 207 economies from January 2015 to December 2025 and then averaged to one observation per country per year. Using the country-year as the unit of analysis permits estimating the relative influence of state capacity, government shielding, and market and currency structure on the price of gasoline while holding world prices constant within each year. Retail gasoline prices are available for 132 countries, and the main model includes 1,013 country-years from 114 countries for which every variable is observed. The sources and measures for every variable are described in Appendix Table A1.</p>
+<p>To measure the price of gasoline, this paper turns to the World Bank's Global Fuel Prices Database (World Bank 2026a). The database reports monthly retail gasoline prices from December 2015 to April 2025, in whatever currency and unit each country publishes: some countries report prices in local currency per liter, others in cents, per gallon, or in euros or US dollars. For each country, the series the World Bank flags as its default was used, which is the regular-grade series where one exists and premium otherwise. Each series was first converted to the main currency unit per liter and then to US dollars using monthly average exchange rates from the International Monetary Fund (International Monetary Fund 2026), and the monthly dollar prices were averaged within each year. Unfortunately for the analysis, a small number of country-years report dollar prices that reflect exchange rate problems rather than real prices. For example, Lebanon's prices from 2021 to 2023 were converted at an official rate during the collapse of its currency, and Liberia's reported price in 2024 and 2025 suddenly rose to about four times its usual level. To correct for this, these five country-years were removed before analysis.</p>
+<p>For the first hypothesis, government effectiveness is measured with the government effectiveness score from the Worldwide Governance Indicators (World Bank 2026d), which ranges from 0 to 100 and captures perceptions of the quality of public services, the civil service, and the formulation and implementation of policy. To measure price regulation, this paper turns to the World Bank's Global Fuel Subsidies and Price Control Measures Database (World Bank 2026b). The database records whether each country's retail fuel prices are set by the government or by the market, but only for the years 2021 through 2024. To extend the measure across the full period, price regulation is coded 1 if a country regulated retail fuel prices in any of those years, and it is treated as a stable trait of each country. State ownership of the oil sector comes from the Natural Resource Governance Institute's National Oil Company Database (Natural Resource Governance Institute 2026), and a country is coded 1 if it appears in the database. One adjustment was made: Denmark is coded 0, because its listed company left the oil and gas business in 2017.</p>
+<p>Government type comes from the Varieties of Democracy project (Coppedge et al. 2026) and is measured with the V-Dem electoral democracy index, which ranges from 0 to 1. The four-category regime classification from the same source serves as an alternative.</p>
+<p>Six control variables are included in the main model. GDP per capita at purchasing power parity comes from the World Development Indicators (World Bank 2026c) and is logged, to account for the higher price levels of richer countries (Balassa 1964). The world gasoline price is the US Gulf Coast gasoline spot price reported by the U.S. Energy Information Administration (2026), converted to dollars per liter and averaged over the same months as each country's pump price, to account for the common shocks all countries face each year (Kpodar and Abdallah 2017). Sanctions come from Release 5 of the Global Sanctions Data Base (Felbermayr et al. 2020; Global Sanctions Data Base 2026), and a country is coded 1 if it was under a United States, European Union, or United Nations sanction that year. Refining capacity, in barrels per day, comes from the same World Bank database as price regulation (World Bank 2026b) and is logged after adding one, so that countries with no refineries are kept, to account for a country's ability to supply its own fuel (Burke and Nishitateno 2013). Currency depreciation is calculated from the same IMF exchange rates used to convert pump prices (International Monetary Fund 2026), as the yearly change in the log of local currency units per US dollar, to account for the effect of exchange rate movements on dollar prices (Kpodar and Imam 2021). Finally, a set of regional indicators following the World Bank's regional groupings, with Europe and Central Asia as the base category and Malta grouped with Europe, accounts for regional traditions of fuel taxation and subsidy for which no comparable cross-national data exist (Sterner 2007; Fattouh and El-Katiri 2013). For the alternative measure of government effectiveness, the Corruption Perceptions Index from Transparency International (2026) is used.</p>
+<p>To test the hypotheses presented above, this paper estimates a model of the price of gasoline that can be summarized as follows:</p>
+<div class="equation" aria-label="Model equation"><i>GP</i><sub>it</sub> = α + β<sub>1</sub><i>GE</i><sub>it</sub> + β<sub>2</sub><i>PR</i><sub>i</sub> + β<sub>3</sub><i>NOC</i><sub>i</sub> + β<sub>4</sub><i>E</i><sub>it</sub> + β<sub>5</sub><i>D</i><sub>it</sub> + β<sub>6</sub><i>NI</i><sub>it</sub> + β<sub>7</sub><i>PEG</i><sub>it</sub> + β<sub>8</sub><i>Y</i><sub>it</sub> + β<sub>9</sub><i>W</i><sub>it</sub> + β<sub>10</sub><i>S</i><sub>it</sub> + β<sub>11</sub><i>R</i><sub>it</sub> + β<sub>12</sub><i>C</i><sub>it</sub> + γ<i>REG</i><sub>i</sub> + ε<sub>it</sub></div>
+<p>where GP is the price of gasoline in country i and year t; α is a constant; β₁ through β₁₂ are the coefficients to be estimated; GE is government effectiveness; PR is price regulation and NOC is state ownership of the oil sector, both of which do not change over time and so carry only the country subscript; E is election timing; D is government type, measured as the democracy index; NI is net importer status; PEG is currency regime; Y is the log of GDP per capita; W is the world gasoline price; S is sanctions; R is the log of refining capacity; C is currency depreciation; REG is a set of regional indicators, with γ its vector of coefficients; and ε is an error term.</p>
+<p>Before estimation, the data were checked for the problems common to data that follow the same countries over time. The dependent variable is close to normally distributed, with a skewness of 0.120 and a kurtosis of 2.500. However, the full model estimated with ordinary least squares (reported as Model 3 in Appendix Table A2) showed that the size of its errors differs across countries (Breusch-Pagan χ² = 24.640, p &lt; .001; Levene W0 = 2.950, p &lt; .001), and that each country's error in one year strongly predicts its error in the next (coefficient = 0.886, p &lt; .001). These tests are reported in Appendix Table A3. Ordinary least squares would therefore understate the uncertainty of every estimate. For this reason, all models are estimated using Prais-Winsten regression with panel-corrected standard errors, which allow the errors to differ in size across countries and to be correlated across countries in the same year, and with a common first-order autocorrelation term to correct for the persistence of errors over time (Beck and Katz 1995, 2011). The panel is unbalanced, so the error covariances are computed using all years each pair of countries shares. Country fixed effects are not used, because two of the hypothesis variables, price regulation and state ownership, do not change within a country over the period studied and would be absorbed by them (Plümper, Troeger, and Manow 2005). Multicollinearity is not a concern: no variance inflation factor exceeds 10, and the highest, for the log of GDP per capita, is 8.130.</p>
+<p>The analysis centers on two models. Model 1 includes all four hypothesis variables and three additional variables (a national election, net importer status, and a pegged currency) with only the two basic controls, GDP per capita and the world price. Model 2, the main model, includes the same variables and all controls. Models 5 through 11, which test each variable separately with all controls included, are reported in Appendix B, along with the theory behind the three additional variables. Two further models, reported in Appendix A (Models 3 and 4), check whether the results depend on the correction for serial correlation or on the choice of measures.</p>
+</section>
+<section data-id="paper/results" class="pane" data-group="paper" data-title="Results" hidden>
+<h2>Results</h2>
+<p>Table 1 reports summary statistics for every variable in the analysis. The average price of gasoline is $1.129 per liter, with a standard deviation of $0.423 and a range from $0.120 to $2.269. About 65 percent of country-years fall in countries that regulated fuel prices, and 29 percent in countries with a national oil company.</p>
+<p class="caption">Table 1. Summary statistics, 2015–2025</p>
+<div class="tablewrap"><table>
+<colgroup>
+<col style="width: 40%"/>
+<col style="width: 11%"/>
+<col style="width: 11%"/>
+<col style="width: 11%"/>
+<col style="width: 11%"/>
+<col style="width: 11%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Variable</strong></th>
+<th class="n"><strong>N</strong></th>
+<th class="n"><strong>Mean</strong></th>
+<th class="n"><strong>Std. Dev.</strong></th>
+<th class="n"><strong>Min</strong></th>
+<th class="n"><strong>Max</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Price of gasoline (USD per liter)</td>
+<td class="n">1,327</td>
+<td class="n">1.129</td>
+<td class="n">0.423</td>
+<td class="n">0.120</td>
+<td class="n">2.269</td>
+</tr>
+<tr class="even">
+<td>Government effectiveness (0–100)</td>
+<td class="n">2,255</td>
+<td class="n">53.538</td>
+<td class="n">19.611</td>
+<td class="n">5.028</td>
+<td class="n">95.866</td>
+</tr>
+<tr class="odd">
+<td>Price regulation</td>
+<td class="n">1,661</td>
+<td class="n">0.649</td>
+<td class="n">0.477</td>
+<td class="n">0.000</td>
+<td class="n">1.000</td>
+</tr>
+<tr class="even">
+<td>National oil company</td>
+<td class="n">2,277</td>
+<td class="n">0.290</td>
+<td class="n">0.454</td>
+<td class="n">0.000</td>
+<td class="n">1.000</td>
+</tr>
+<tr class="odd">
+<td>Democracy index (0–1)</td>
+<td class="n">1,925</td>
+<td class="n">0.509</td>
+<td class="n">0.259</td>
+<td class="n">0.014</td>
+<td class="n">0.921</td>
+</tr>
+<tr class="even">
+<td>Log GDP per capita</td>
+<td class="n">2,128</td>
+<td class="n">9.599</td>
+<td class="n">1.147</td>
+<td class="n">6.900</td>
+<td class="n">11.846</td>
+</tr>
+<tr class="odd">
+<td>World gasoline price (USD per liter)</td>
+<td class="n">1,332</td>
+<td class="n">0.502</td>
+<td class="n">0.141</td>
+<td class="n">0.221</td>
+<td class="n">0.791</td>
+</tr>
+<tr class="even">
+<td>Under major sanctions</td>
+<td class="n">2,277</td>
+<td class="n">0.391</td>
+<td class="n">0.488</td>
+<td class="n">0.000</td>
+<td class="n">1.000</td>
+</tr>
+<tr class="odd">
+<td>Log refining capacity</td>
+<td class="n">1,672</td>
+<td class="n">7.318</td>
+<td class="n">6.295</td>
+<td class="n">0.000</td>
+<td class="n">16.732</td>
+</tr>
+<tr class="even">
+<td>Currency depreciation</td>
+<td class="n">1,919</td>
+<td class="n">0.041</td>
+<td class="n">0.276</td>
+<td class="n">−4.811</td>
+<td class="n">8.434</td>
+</tr>
+</tbody>
+</table></div>
+<p class="note">Note: Unit of analysis is the country-year. The number of observations differs by variable because of source coverage.</p>
+<p>Table 2 reports the correlations between the price of gasoline and each hypothesis variable. Before any controls, the price of gasoline is positively correlated with government effectiveness (r = 0.440) and the democracy index (r = 0.569), and negatively correlated with price regulation (r = −0.382) and a national oil company (r = −0.514). No two hypothesis variables are correlated above 0.700; the highest is between government effectiveness and the democracy index (r = 0.649).</p>
+<p class="caption">Table 2. Pairwise correlations between the price of gasoline and the hypothesis variables</p>
+<div class="tablewrap"><table>
+<colgroup>
+<col style="width: 39%"/>
+<col style="width: 12%"/>
+<col style="width: 12%"/>
+<col style="width: 12%"/>
+<col style="width: 12%"/>
+<col style="width: 12%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th class="n n"><strong>1</strong></th>
+<th class="n n"><strong>2</strong></th>
+<th class="n n"><strong>3</strong></th>
+<th class="n n"><strong>4</strong></th>
+<th class="n n"><strong>5</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. Price of gasoline</td>
+<td class="n">1.000</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2. Government effectiveness</td>
+<td class="n">0.440*</td>
+<td class="n">1.000</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3. Price regulation</td>
+<td class="n">−0.382*</td>
+<td class="n">−0.512*</td>
+<td class="n">1.000</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4. National oil company</td>
+<td class="n">−0.514*</td>
+<td class="n">−0.238*</td>
+<td class="n">0.311*</td>
+<td class="n">1.000</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5. Democracy index</td>
+<td class="n">0.569*</td>
+<td class="n">0.649*</td>
+<td class="n">−0.488*</td>
+<td class="n">−0.318*</td>
+<td class="n">1.000</td>
+</tr>
+</tbody>
+</table></div>
+<p class="note">Note: * Indicates later significance at the .05 level. Correlations with the control variables are reported in Table A4 in the appendix.</p>
+<p>Table 3 reports the two main models, which include all four hypothesis variables together, along with the three additional variables discussed in Appendix B. Model 1 includes only the two basic controls, GDP per capita and the world price, and Model 2, the full model, adds sanctions, refining capacity, currency depreciation, and region. In Model 1, government effectiveness (b = 0.004, p = .011), price regulation (b = −0.102, p = .005), a national oil company (b = −0.306, p &lt; .001), and the democracy index (b = 0.321, p &lt; .001) are significant in the expected direction for their hypotheses. In Model 2, three hypothesis variables remain significant. A national oil company is associated with a price about 26 cents per liter lower (b = −0.261, p &lt; .001). A move from the least to the most democratic government on the democracy index is associated with a price about 26 cents per liter higher (b = 0.263, p = .004). Government effectiveness remains positive (b = 0.005, p = .008), so a 10-point increase is associated with a price about 5 cents per liter higher. Price regulation remains negative but is no longer significant once all controls are included (b = −0.060, p = .206). A national election (b = −0.008, p = .133), net importer status (b = 0.006, p = .757), and a pegged currency (b = −0.033, p = .130) are not significant in either model. Among the controls in Model 2, the world gasoline price (b = 0.714, p &lt; .001) and currency depreciation (b = −0.210, p = .003) are significant, and five of the six regions have significantly lower prices than Europe and Central Asia; the regions are jointly significant (χ² = 192.060, p &lt; .001). When each hypothesis variable is instead tested separately with all controls (Models 5 through 8, Appendix Table B1), all four are statistically significant on their own.</p>
+<p class="caption">Table 3. Predictors of the Price of Gasoline with All Hypothesis Variables Using Prais–Winsten Regression, 2016–2025</p>
+<div class="tablewrap"><table>
+<colgroup>
+<col style="width: 43%"/>
+<col style="width: 28%"/>
+<col style="width: 28%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th class="n"><strong>Model 1</strong></th>
+<th class="n"><strong>Model 2</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em><u>Independent Variables</u></em></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Government effectiveness</td>
+<td class="n"><p>0.004</p>
+<p>(0.002)*</p></td>
+<td class="n"><p>0.005</p>
+<p>(0.002)**</p></td>
+</tr>
+<tr class="odd">
+<td>Price regulation</td>
+<td class="n"><p>−0.102</p>
+<p>(0.037)**</p></td>
+<td class="n"><p>−0.060</p>
+<p>(0.047)</p></td>
+</tr>
+<tr class="even">
+<td>National oil company</td>
+<td class="n"><p>−0.306</p>
+<p>(0.048)***</p></td>
+<td class="n"><p>−0.261</p>
+<p>(0.045)***</p></td>
+</tr>
+<tr class="odd">
+<td>Democracy index</td>
+<td class="n"><p>0.321</p>
+<p>(0.082)***</p></td>
+<td class="n"><p>0.263</p>
+<p>(0.092)**</p></td>
+</tr>
+<tr class="even">
+<td><em><u>Additional Variables (see Appendix B)</u></em></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>National election</td>
+<td class="n"><p>−0.005</p>
+<p>(0.005)</p></td>
+<td class="n"><p>−0.008</p>
+<p>(0.006)</p></td>
+</tr>
+<tr class="even">
+<td>Net gasoline importer</td>
+<td class="n"><p>−0.001</p>
+<p>(0.020)</p></td>
+<td class="n"><p>0.006</p>
+<p>(0.020)</p></td>
+</tr>
+<tr class="odd">
+<td>Pegged currency</td>
+<td class="n"><p>0.009</p>
+<p>(0.021)</p></td>
+<td class="n"><p>−0.033</p>
+<p>(0.022)</p></td>
+</tr>
+<tr class="even">
+<td><em><u>Control Variables</u></em></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Log GDP per capita</td>
+<td class="n"><p>−0.008</p>
+<p>(0.028)</p></td>
+<td class="n"><p>−0.009</p>
+<p>(0.034)</p></td>
+</tr>
+<tr class="even">
+<td>World gasoline price</td>
+<td class="n"><p>0.682</p>
+<p>(0.079)***</p></td>
+<td class="n"><p>0.714</p>
+<p>(0.076)***</p></td>
+</tr>
+<tr class="odd">
+<td>Under major sanctions</td>
+<td></td>
+<td class="n"><p>−0.009</p>
+<p>(0.014)</p></td>
+</tr>
+<tr class="even">
+<td>Log refining capacity</td>
+<td></td>
+<td class="n"><p>−0.000</p>
+<p>(0.004)</p></td>
+</tr>
+<tr class="odd">
+<td>Currency depreciation</td>
+<td></td>
+<td class="n"><p>−0.210</p>
+<p>(0.070)**</p></td>
+</tr>
+<tr class="even">
+<td><em><u>Region (base: Europe &amp; Central Asia)</u></em></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>North America</td>
+<td></td>
+<td class="n"><p>−0.643</p>
+<p>(0.170)***</p></td>
+</tr>
+<tr class="even">
+<td>Latin America &amp; Caribbean</td>
+<td></td>
+<td class="n"><p>−0.228</p>
+<p>(0.036)***</p></td>
+</tr>
+<tr class="odd">
+<td>Middle East &amp; North Africa</td>
+<td></td>
+<td class="n"><p>−0.361</p>
+<p>(0.042)***</p></td>
+</tr>
+<tr class="even">
+<td>South Asia</td>
+<td></td>
+<td class="n"><p>−0.158</p>
+<p>(0.063)*</p></td>
+</tr>
+<tr class="odd">
+<td>East Asia &amp; Pacific</td>
+<td></td>
+<td class="n"><p>−0.328</p>
+<p>(0.046)***</p></td>
+</tr>
+<tr class="even">
+<td>Sub-Saharan Africa</td>
+<td></td>
+<td class="n"><p>−0.093</p>
+<p>(0.079)</p></td>
+</tr>
+<tr class="odd">
+<td>Constant</td>
+<td class="n"><p>0.629</p>
+<p>(0.264)*</p></td>
+<td class="n"><p>0.761</p>
+<p>(0.305)*</p></td>
+</tr>
+<tr class="even">
+<td>N (country-years)</td>
+<td class="n">1,104</td>
+<td class="n">1,013</td>
+</tr>
+<tr class="odd">
+<td>Countries</td>
+<td class="n">115</td>
+<td class="n">114</td>
+</tr>
+<tr class="even">
+<td>Wald χ²</td>
+<td class="n">134.14*** (9)</td>
+<td class="n">1,976.10*** (15)</td>
+</tr>
+<tr class="odd">
+<td>ρ (AR1)</td>
+<td class="n">0.840</td>
+<td class="n">0.791</td>
+</tr>
+<tr class="even">
+<td>R²</td>
+<td class="n">0.588</td>
+<td class="n">0.642</td>
+</tr>
+<tr class="odd">
+<td>Adjusted R²</td>
+<td class="n">0.584</td>
+<td class="n">0.636</td>
+</tr>
+</tbody>
+</table></div>
+<p class="note">Panel-corrected standard errors in parentheses. Prais–Winsten regression with a common AR(1) term. Dependent variable is the price of gasoline in US dollars per liter. *p&lt;.05; **p&lt;.01; ***p&lt;.001 (two-tailed). Wald χ² degrees of freedom in parentheses. Models 1 and 2 also include a national election, net importer status, and a pegged currency, which were tested as hypotheses but not supported (see Appendix B). They are kept as controls because the literature links each to the price of gasoline, and leaving them out could bias the other estimates.</p>
+<p>The overall fit of the model is good. The full model accounts for about 64 percent of the variation in the price of gasoline (adjusted R² = 0.636), compared with 0.584 for Model 1. Adding sanctions, refining capacity, currency depreciation, and region therefore raises the adjusted R² by about 0.05. Because the models correct for serial correlation, the R² describes the fit of the transformed model and is somewhat lower than the 0.648 from the same model estimated without that correction (Model 3, Table A2 in the appendix). The comparison between Models 1 and 2 shows that the loss of significance for price regulation comes from adding the regional and other controls.</p>
+</section>
+<section data-id="paper/findings" class="pane" data-group="paper" data-title="Findings" hidden>
+<h2>Findings</h2>
+<p>The results support three of the four hypotheses and suggest that the price consumers pay for gasoline is shaped more by who owns the oil sector and what kind of government holds power than by how prices are formally regulated. The findings are discussed in order of significance in the full model.</p>
+<p>State ownership of the oil sector has the strongest and most consistent effect, which supports Hypothesis 3. Countries with a national oil company pay about 26 cents less per liter than comparable countries without one, and the effect holds in every model, including the robustness checks in the Appendix. This follows the literature, which finds that national oil companies halve the effect of world oil price increases on domestic gasoline prices (Cheon, Lackner, and Urpelainen 2015) and that state oil firms are used to absorb costs and hold prices below market levels (Victor, Hults, and Thurber 2012; Ichsan, Lockwood, and Ramadhani 2022). This paper extends that finding from the movement of prices to their level. It also departs from the expectation stated above that price regulation would be the strongest shielding tool. Shielding that operates through state-owned firms appears to matter more than shielding through formal price rules.</p>
+<p>Government type has the second strongest effect, and the results support Hypothesis 4: less democratic governments charge lower prices for gasoline. This places the paper on one side of the most divided debate in the literature. The results agree with work finding that autocracies subsidize petroleum products more than democracies (Kim and Urpelainen 2016), and do not support work finding that democracies favor consumers by lowering prices (Rogowski and Kayser 2002; Chang et al. 2011; Weinberg 2012; Baker and Wojcik 2019). One reconciliation is that those studies concern prices of goods shaped by trade protection, where democracies lower prices by lowering barriers, while fuel prices are shaped by subsidies, which autocracies use to buy stability. The results also do not support work finding that political leadership has little effect on fuel pricing (Martinez-Alvarez et al. 2022; Kpodar and Imam 2021); that work, however, concerns short-run changes in prices rather than their level. The effect of democracy holds while government effectiveness is held constant, which is consistent with work suggesting that regime type and institutional capacity each shape fuel pricing (McAlexander, Yang, and Urpelainen 2025). The alternative four-category measure in the Appendix shows that every more democratic regime type has higher prices than closed autocracy, but it does not show that electoral autocracies have the lowest prices, so the expectation that electoral autocracies subsidize the most is not supported here.</p>
+<p>Government effectiveness has the third strongest effect and is positive, which supports Hypothesis 1. As the taxation mechanism predicts, more effective states charge more for gasoline, not less. This follows evidence that countries with weak institutions subsidize gasoline (Cheon, Urpelainen, and Lackner 2013) and that weak states raise little revenue from any source (Besley and Persson 2014). The result also speaks to the concern that broad governance measures capture national income rather than governance (Kaufmann and Kraay 2002; Hanson and Sigman 2021). In the full model, government effectiveness remains significant while GDP per capita does not, and the corruption measure used as an alternative produces the same result, so the effect does not appear to be a proxy for wealth.</p>
+<p>Price regulation is negative and significant when tested alone (Appendix Table B1) and alongside the other hypothesis variables, but not once regional controls are added, so Hypothesis 2 is only partly supported. Regulated prices are concentrated in particular regions, especially the Middle East and North Africa and parts of Asia, and the regional indicators appear to absorb much of their effect. This is consistent with work suggesting that fuel price control clusters with regime type and institutional capacity (McAlexander, Yang, and Urpelainen 2025). The result may also reflect measurement: price regulation is observed only from 2021 to 2024 and treated as a stable trait, even though pricing policy both advances and backslides within countries (Ross, Hazlett, and Mahdavi 2017).</p>
+<p>Currency depreciation, included as a control, has one of the largest effects in the model: a 10 percent fall in a currency's value is associated with a price about 2 cents per liter lower in dollar terms. This is consistent with evidence that depreciation slows the pass-through of world fuel prices (Kpodar and Imam 2021) and that exchange rate changes reach retail prices only partly (Campa and Goldberg 2005).</p>
+<p>Taken together, the findings suggest that the political explanations matter more than the economic ones, as the theory expected. Two of the three significant variables are political choices about the structure of the state, who owns the oil sector and how democratic the government is, and the third is the state's capacity to carry out policy. The economic explanations, discussed in Appendix B, matter mainly through the value of the currency rather than through trade position or currency regime.</p>
+</section>
+<section data-id="paper/conclusion" class="pane" data-group="paper" data-title="Conclusion" hidden>
+<h2>Conclusion</h2>
+<p>This paper asked what explains cross-national variation in the price consumers pay for gasoline. Across 114 countries from 2016 to 2025, the answer lies mainly in the structure of the state. Countries with a national oil company pay substantially less, more democratic governments charge more, and more effective governments charge more as well. Elections, trade position, and currency regime have no independent effect, while price regulation matters less than expected once regional patterns are taken into account.</p>
+<p>These findings carry three larger implications. First, for policy, they suggest that the most durable form of fuel subsidy is not a formal price control but state ownership of the oil sector, which hides the cost of cheap fuel inside the accounts of a state firm rather than in the budget. Reformers who focus on removing price controls may leave the larger source of low prices in place. Second, for who bears the costs and benefits of fuel policy, the results suggest that cheap fuel is a feature of less democratic and less capable states, where it serves as a broad and costly substitute for the targeted support that capable states can provide. Third, for the study of the state, the positive effect of government effectiveness suggests that the pump price does work as an observable measure of what governments are able to deliver: capable states tax fuel, while weaker states give it away.</p>
+<p>The next research steps follow from the limits of this design. Price regulation should be measured as a policy that changes over time rather than as a fixed trait, which would allow a sharper test of whether it shapes prices independently of region. Election timing should be measured by month rather than by year, and tested alongside state capacity and the closeness of the race. Data on fuel taxes themselves would allow the regional indicators used here to be replaced with direct measures of taxation and subsidy. Finally, the original motivation for this project, how gasoline import tariffs pass through to consumer prices, remains open. Testing it would require event-level data on tariff changes and the legal instruments that impose them, including their political design and legislative complexity, which could build on the price-level findings reported here.</p>
+</section>
+<section data-id="paper/references" class="pane" data-group="paper" data-title="References" hidden>
+<h2>References</h2>
+<p>Adhikari, Bimal, Jeffrey King, and Krishna Chaitanya Vadlamannati. 2026. "Price Wars: Political Competition and Fuel Taxes in Subnational India." <em>Economic Systems</em> 50: 101390.</p>
+<p>Baker, Andy, and Stefan Wojcik. 2019. "Does Democratization Lower Consumer Prices? Regime Type, Prices, and the Consumer–Producer Tradeoff." <em>International Political Science Review</em> 40 (2): 145–160. https://doi.org/10.1177/0192512117731264.</p>
+<p>Balassa, Bela. 1964. "The Purchasing-Power Parity Doctrine: A Reappraisal." <em>Journal of Political Economy</em> 72 (6): 584–596. https://doi.org/10.1086/258965.</p>
+<p>Beck, Nathaniel, and Jonathan N. Katz. 1995. "What to Do (and Not to Do) with Time-Series Cross-Section Data." <em>American Political Science Review</em> 89 (3): 634–647.</p>
+<p>Beck, Nathaniel, and Jonathan N. Katz. 2011. "Modeling Dynamics in Time-Series–Cross-Section Political Economy Data." <em>Annual Review of Political Science</em> 14: 331–352. https://doi.org/10.1146/annurev-polisci-071510-103222.</p>
+<p>Besley, Timothy, and Torsten Persson. 2009. "The Origins of State Capacity: Property Rights, Taxation, and Politics." <em>American Economic Review</em> 99 (4): 1218–1244. https://doi.org/10.1257/aer.99.4.1218.</p>
+<p>Besley, Timothy, and Torsten Persson. 2011. <em>Pillars of Prosperity: The Political Economics of Development Clusters</em>. Princeton, NJ: Princeton University Press.</p>
+<p>Besley, Timothy, and Torsten Persson. 2014. "Why Do Developing Countries Tax So Little?" <em>Journal of Economic Perspectives</em> 28 (4): 99–120. https://doi.org/10.1257/jep.28.4.99.</p>
+<p>Borenstein, Severin, A. Colin Cameron, and Richard Gilbert. 1997. "Do Gasoline Prices Respond Asymmetrically to Crude Oil Price Changes?" <em>Quarterly Journal of Economics</em> 112 (1): 305–339.</p>
+<p>Burke, Paul J., and Shuhei Nishitateno. 2013. "Gasoline Prices, Gasoline Consumption, and New-Vehicle Fuel Economy: Evidence for a Large Sample of Countries." <em>Energy Economics</em> 36: 363–370. https://doi.org/10.1016/j.eneco.2012.09.008.</p>
+<p>Calvo, Guillermo A., and Carmen M. Reinhart. 2002. "Fear of Floating." <em>Quarterly Journal of Economics</em> 117 (2): 379–408.</p>
+<p>Campa, José Manuel, and Linda S. Goldberg. 2005. "Exchange Rate Pass-Through into Import Prices." <em>Review of Economics and Statistics</em> 87 (4): 679–690.</p>
+<p>Chang, Eric C. C., Mark Andreas Kayser, Drew A. Linzer, and Ronald Rogowski. 2011. <em>Electoral Systems and the Balance of Consumer-Producer Power</em>. New York: Cambridge University Press.</p>
+<p>Chang, Eric C. C., Mark Andreas Kayser, and Ronald Rogowski. 2008. "Electoral Systems and Real Prices: Panel Evidence for the OECD Countries, 1970–2000." <em>British Journal of Political Science</em> 38 (4): 739–751. https://doi.org/10.1017/S0007123408000367.</p>
+<p>Cheon, Andrew, Maureen Lackner, and Johannes Urpelainen. 2015. "Instruments of Political Control: National Oil Companies, Oil Prices, and Petroleum Subsidies." <em>Comparative Political Studies</em> 48 (3): 370–402. https://doi.org/10.1177/0010414014543440.</p>
+<p>Cheon, Andrew, Johannes Urpelainen, and Maureen Lackner. 2013. "Why Do Governments Subsidize Gasoline Consumption? An Empirical Analysis of Global Gasoline Prices, 2002–2009." <em>Energy Policy</em> 56: 382–390. https://doi.org/10.1016/j.enpol.2012.12.075.</p>
+<p>Coady, David, Ian Parry, Louis Sears, and Baoping Shang. 2017. "How Large Are Global Fossil Fuel Subsidies?" <em>World Development</em> 91: 11–27. https://doi.org/10.1016/j.worlddev.2016.10.004.</p>
+<p>Fails, Matthew D. 2025. "Pain at the Pump, Pain at the Polls? Global Evidence on Election Timing, State Capacity, and Gasoline Prices." <em>Journal of Political Institutions and Political Economy</em> 6 (1): 1–25. https://doi.org/10.1561/113.00000115.</p>
+<p>Fattouh, Bassam, and Laura El-Katiri. 2013. "Energy Subsidies in the Middle East and North Africa." <em>Energy Strategy Reviews</em> 2 (1): 108–115. https://doi.org/10.1016/j.esr.2012.11.004.</p>
+<p>Felbermayr, Gabriel, Aleksandra Kirilakha, Constantinos Syropoulos, Erdal Yalcin, and Yoto V. Yotov. 2020. "The Global Sanctions Data Base." <em>European Economic Review</em> 129: 103561. https://doi.org/10.1016/j.euroecorev.2020.103561.</p>
+<p>Fukuyama, Francis. 2004. <em>State-Building: Governance and World Order in the 21st Century</em>. Ithaca, NY: Cornell University Press.</p>
+<p>Goldberg, Pinelopi Koujianou, and Michael M. Knetter. 1997. "Goods Prices and Exchange Rates: What Have We Learned?" <em>Journal of Economic Literature</em> 35 (3): 1243–1272.</p>
+<p>Gopinath, Gita, Emine Boz, Camila Casas, Federico J. Díez, Pierre-Olivier Gourinchas, and Mikkel Plagborg-Møller. 2020. "Dominant Currency Paradigm." <em>American Economic Review</em> 110 (3): 677–719. https://doi.org/10.1257/aer.20171201.</p>
+<p>Hammar, Henrik, Åsa Löfgren, and Thomas Sterner. 2004. "Political Economy Obstacles to Fuel Taxation." <em>The Energy Journal</em> 25 (3): 1–17. https://doi.org/10.5547/ISSN0195-6574-EJ-Vol25-No3-1.</p>
+<p>Hanson, Jonathan K., and Rachel Sigman. 2021. "Leviathan's Latent Dimensions: Measuring State Capacity for Comparative Political Research." <em>Journal of Politics</em> 83 (4): 1495–1510. https://doi.org/10.1086/715066.</p>
+<p>Ichsan, Muhammad, Matthew Lockwood, and Maghfira Ramadhani. 2022. "National Oil Companies and Fossil Fuel Subsidy Regimes in Transition: The Case of Indonesia." <em>The Extractive Industries and Society</em> 11: 101104.</p>
+<p>Ilzetzki, Ethan, Carmen M. Reinhart, and Kenneth S. Rogoff. 2019. "Exchange Arrangements Entering the Twenty-First Century: Which Anchor Will Hold?" <em>Quarterly Journal of Economics</em> 134 (2): 599–646.</p>
+<p>Kaufmann, Daniel, and Aart Kraay. 2002. "Growth without Governance." <em>Economía</em> 3 (1): 169–229.</p>
+<p>Kaufmann, Daniel, Aart Kraay, and Massimo Mastruzzi. 2010. "The Worldwide Governance Indicators: Methodology and Analytical Issues." Policy Research Working Paper 5430. Washington, DC: World Bank.</p>
+<p>Kellenberg, Derek, and Arik Levinson. 2019. "Misreporting Trade: Tariff Evasion, Corruption, and Auditing Standards." <em>Review of International Economics</em> 27 (1): 106–129. https://doi.org/10.1111/roie.12363.</p>
+<p>Kim, Sung Eun, and Johannes Urpelainen. 2016. "Democracy, Autocracy and the Urban Bias: Evidence from Petroleum Subsidies." <em>Political Studies</em> 64 (3): 552–572. https://doi.org/10.1111/1467-9248.12200.</p>
+<p>Klomp, Jeroen. 2020. "Subsidizing Power." <em>Scottish Journal of Political Economy</em> 67 (3): 300–321. https://doi.org/10.1111/sjpe.12235.</p>
+<p>Kpodar, Kangni, and Chadi Abdallah. 2017. "Dynamic Fuel Price Pass-Through: Evidence from a New Global Retail Fuel Price Database." <em>Energy Economics</em> 66: 303–312. https://doi.org/10.1016/j.eneco.2017.06.017.</p>
+<p>Kpodar, Kangni, and Patrick A. Imam. 2021. "To Pass (or Not to Pass) Through International Fuel Price Changes to Domestic Fuel Prices in Developing Countries: What Are the Drivers?" <em>Energy Policy</em> 149: 111999. https://doi.org/10.1016/j.enpol.2020.111999.</p>
+<p>Marion, Justin, and Erich Muehlegger. 2011. "Fuel Tax Incidence and Supply Conditions." <em>Journal of Public Economics</em> 95 (9–10): 1202–1212. https://doi.org/10.1016/j.jpubeco.2011.04.003.</p>
+<p>Martinez-Alvarez, Cesar B., Chad Hazlett, Paasha Mahdavi, and Michael L. Ross. 2022. "Political Leadership Has Limited Impact on Fossil Fuel Taxes and Subsidies." <em>Proceedings of the National Academy of Sciences</em> 119: e2208024119. https://doi.org/10.1073/pnas.2208024119.</p>
+<p>McAlexander, Richard J., Joonseok Yang, and Johannes Urpelainen. 2025. "Political Regime, Institutional Capacity, and Inefficient Policy: Evidence from Gasoline Subsidies." <em>Review of Policy Research</em> 42 (4): 883–904. https://doi.org/10.1111/ropr.12580.</p>
+<p>Plümper, Thomas, Vera E. Troeger, and Philip Manow. 2005. "Panel Data Analysis in Comparative Politics: Linking Method to Theory." <em>European Journal of Political Research</em> 44 (2): 327–354. https://doi.org/10.1111/j.1475-6765.2005.00230.x.</p>
+<p>Rogowski, Ronald, and Mark Andreas Kayser. 2002. "Majoritarian Electoral Systems and Consumer Power: Price-Level Evidence from the OECD Countries." <em>American Journal of Political Science</em> 46 (3): 526–539.</p>
+<p>Ross, Michael L., Chad Hazlett, and Paasha Mahdavi. 2017. "Global Progress and Backsliding on Gasoline Taxes and Subsidies." <em>Nature Energy</em> 2 (1): 16201. https://doi.org/10.1038/nenergy.2016.201.</p>
+<p>Sterner, Thomas. 2007. "Fuel Taxes: An Important Instrument for Climate Policy." <em>Energy Policy</em> 35 (6): 3194–3202.</p>
+<p>Victor, David G., David R. Hults, and Mark C. Thurber, eds. 2012. <em>Oil and Governance: State-Owned Enterprises and the World Energy Supply</em>. Cambridge: Cambridge University Press.</p>
+<p>Weinberg, Joe. 2012. "Do Majoritarian Electoral Systems Favor Consumers? Identifying Cross-National Consumer Bias." <em>International Studies Quarterly</em> 56 (4): 820–826.</p>
+<p>Weyl, E. Glen, and Michal Fabinger. 2013. "Pass-Through as an Economic Tool: Principles of Incidence under Imperfect Competition." <em>Journal of Political Economy</em> 121 (3): 528–583. https://doi.org/10.1086/670401.</p>
+<p>World Bank. 2023. <em>Connecting to Compete 2023: Trade Logistics in the Global Economy</em>. Washington, DC: World Bank.</p>
+<p>Yeboah-Assiamah, Emmanuel, Shadrach Baa Naa Kundi, and Kwame Asamoah. 2024. "'Where You Stand Depends on Where You Sit': The Politics of Petroleum Pricing in Ghana's Election Cycle." <em>Politics &amp; Policy</em> 52 (6): 1353–1376. https://doi.org/10.1111/polp.12643.</p>
+<h3>Data References</h3>
+<p>Coppedge, Michael, et al. 2026. "V-Dem Country-Year Dataset v16." Varieties of Democracy (V-Dem) Project. https://v-dem.net/data/the-v-dem-dataset.</p>
+<p>Global Sanctions Data Base. 2026. "Global Sanctions Data Base, Release 5." https://globalsanctionsdatabase.com.</p>
+<p>International Monetary Fund. 2026. "Exchange Rates, Monthly: Domestic Currency per US Dollar, Period Average." IMF Data. https://data.imf.org.</p>
+<p>Natural Resource Governance Institute. 2026. "National Oil Company Database." https://www.nationaloilcompanydata.org.</p>
+<p>Transparency International. 2026. "Corruption Perceptions Index 2025." https://www.transparency.org/en/cpi.</p>
+<p>United Nations. 2026. "UN Comtrade Database." https://comtradeplus.un.org.</p>
+<p>U.S. Energy Information Administration. 2026. "Spot Prices for Crude Oil and Petroleum Products." https://www.eia.gov/dnav/pet/pet_pri_spt_s1_m.htm.</p>
+<p>World Bank. 2026a. "Global Fuel Prices Database." https://datacatalog.worldbank.org/search/dataset/0066829/global-fuel-prices-database.</p>
+<p>World Bank. 2026b. "Global Fuel Subsidies and Price Control Measures Database." https://datacatalog.worldbank.org/search/dataset/0066833/global-fuel-subsidies-and-price-control-measures-database.</p>
+<p>World Bank. 2026c. "World Development Indicators: GDP per Capita, PPP (Constant International $)." https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD.</p>
+<p>World Bank. 2026d. "Worldwide Governance Indicators." https://www.worldbank.org/en/publication/worldwide-governance-indicators.</p>
+</section>
+<section data-id="appendix/appendix-a" class="pane" data-group="appendix" data-title="Appendix A" hidden>
+<h2>Appendix A</h2>
+<p>The full Stata output (do-files 01 through 05 and their logs) and the codebook are provided as separate files.</p>
+<p class="note" style="font-size:14px">Table A1, Variable measures and sources, is in the <a href="#codebook">Codebook</a>.</p>
+<p class="caption">Table A2. Robustness Checks for the Full Model, 2016–2025</p>
+<div class="tablewrap"><table>
+<colgroup>
+<col style="width: 43%"/>
+<col style="width: 18%"/>
+<col style="width: 18%"/>
+<col style="width: 18%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th class="n"><strong>Model 2</strong></th>
+<th class="n"><strong>Model 3</strong></th>
+<th class="n"><strong>Model 4</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em><u>Independent Variables</u></em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Government effectiveness</td>
+<td class="n"><p>0.005</p>
+<p>(0.002)**</p></td>
+<td class="n"><p>0.007</p>
+<p>(0.001)***</p></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Corruption Perceptions Index</td>
+<td></td>
+<td></td>
+<td class="n"><p>0.006</p>
+<p>(0.002)***</p></td>
+</tr>
+<tr class="even">
+<td>Price regulation</td>
+<td class="n"><p>−0.060</p>
+<p>(0.047)</p></td>
+<td class="n"><p>−0.031</p>
+<p>(0.019)</p></td>
+<td class="n"><p>−0.076</p>
+<p>(0.045)</p></td>
+</tr>
+<tr class="odd">
+<td>National oil company</td>
+<td class="n"><p>−0.261</p>
+<p>(0.045)***</p></td>
+<td class="n"><p>−0.222</p>
+<p>(0.026)***</p></td>
+<td class="n"><p>−0.254</p>
+<p>(0.046)***</p></td>
+</tr>
+<tr class="even">
+<td>National election</td>
+<td class="n"><p>−0.008</p>
+<p>(0.006)</p></td>
+<td class="n"><p>−0.030</p>
+<p>(0.017)</p></td>
+<td class="n"><p>−0.009</p>
+<p>(0.006)</p></td>
+</tr>
+<tr class="odd">
+<td>Democracy index</td>
+<td class="n"><p>0.263</p>
+<p>(0.092)**</p></td>
+<td class="n"><p>0.481</p>
+<p>(0.061)***</p></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Electoral autocracy</td>
+<td></td>
+<td></td>
+<td class="n"><p>0.071</p>
+<p>(0.030)*</p></td>
+</tr>
+<tr class="odd">
+<td>Electoral democracy</td>
+<td></td>
+<td></td>
+<td class="n"><p>0.060</p>
+<p>(0.038)</p></td>
+</tr>
+<tr class="even">
+<td>Liberal democracy</td>
+<td></td>
+<td></td>
+<td class="n"><p>0.105</p>
+<p>(0.042)*</p></td>
+</tr>
+<tr class="odd">
+<td>Net gasoline importer</td>
+<td class="n"><p>0.006</p>
+<p>(0.020)</p></td>
+<td class="n"><p>−0.094</p>
+<p>(0.023)***</p></td>
+<td class="n"><p>0.007</p>
+<p>(0.020)</p></td>
+</tr>
+<tr class="even">
+<td>Pegged currency</td>
+<td class="n"><p>−0.033</p>
+<p>(0.022)</p></td>
+<td class="n"><p>−0.025</p>
+<p>(0.022)</p></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Pegged to US dollar</td>
+<td></td>
+<td></td>
+<td class="n"><p>−0.060</p>
+<p>(0.025)*</p></td>
+</tr>
+<tr class="even">
+<td><em><u>Control Variables</u></em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Log GDP per capita</td>
+<td class="n"><p>−0.009</p>
+<p>(0.034)</p></td>
+<td class="n"><p>−0.092</p>
+<p>(0.022)***</p></td>
+<td class="n"><p>−0.011</p>
+<p>(0.033)</p></td>
+</tr>
+<tr class="even">
+<td>World gasoline price</td>
+<td class="n"><p>0.714</p>
+<p>(0.076)***</p></td>
+<td class="n"><p>0.879</p>
+<p>(0.060)***</p></td>
+<td class="n"><p>0.718</p>
+<p>(0.075)***</p></td>
+</tr>
+<tr class="odd">
+<td>Under major sanctions</td>
+<td class="n"><p>−0.009</p>
+<p>(0.014)</p></td>
+<td class="n"><p>−0.006</p>
+<p>(0.020)</p></td>
+<td class="n"><p>−0.006</p>
+<p>(0.015)</p></td>
+</tr>
+<tr class="even">
+<td>Log refining capacity</td>
+<td class="n"><p>−0.000</p>
+<p>(0.004)</p></td>
+<td class="n"><p>−0.001</p>
+<p>(0.002)</p></td>
+<td class="n"><p>0.001</p>
+<p>(0.003)</p></td>
+</tr>
+<tr class="odd">
+<td>Currency depreciation</td>
+<td class="n"><p>−0.210</p>
+<p>(0.070)**</p></td>
+<td class="n"><p>−0.219</p>
+<p>(0.073)**</p></td>
+<td class="n"><p>−0.216</p>
+<p>(0.069)**</p></td>
+</tr>
+<tr class="even">
+<td><em><u>Region (base: Europe &amp; Central Asia)</u></em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>North America</td>
+<td class="n"><p>−0.643</p>
+<p>(0.170)***</p></td>
+<td class="n"><p>−0.640</p>
+<p>(0.054)***</p></td>
+<td class="n"><p>−0.629</p>
+<p>(0.153)***</p></td>
+</tr>
+<tr class="even">
+<td>Latin America &amp; Caribbean</td>
+<td class="n"><p>−0.228</p>
+<p>(0.036)***</p></td>
+<td class="n"><p>−0.267</p>
+<p>(0.030)***</p></td>
+<td class="n"><p>−0.148</p>
+<p>(0.034)***</p></td>
+</tr>
+<tr class="odd">
+<td>Middle East &amp; North Africa</td>
+<td class="n"><p>−0.361</p>
+<p>(0.042)***</p></td>
+<td class="n"><p>−0.308</p>
+<p>(0.049)***</p></td>
+<td class="n"><p>−0.373</p>
+<p>(0.044)***</p></td>
+</tr>
+<tr class="even">
+<td>South Asia</td>
+<td class="n"><p>−0.158</p>
+<p>(0.063)*</p></td>
+<td class="n"><p>−0.269</p>
+<p>(0.054)***</p></td>
+<td class="n"><p>−0.136</p>
+<p>(0.063)*</p></td>
+</tr>
+<tr class="odd">
+<td>East Asia &amp; Pacific</td>
+<td class="n"><p>−0.328</p>
+<p>(0.046)***</p></td>
+<td class="n"><p>−0.327</p>
+<p>(0.033)***</p></td>
+<td class="n"><p>−0.302</p>
+<p>(0.044)***</p></td>
+</tr>
+<tr class="even">
+<td>Sub-Saharan Africa</td>
+<td class="n"><p>−0.093</p>
+<p>(0.079)</p></td>
+<td class="n"><p>−0.188</p>
+<p>(0.041)***</p></td>
+<td class="n"><p>−0.101</p>
+<p>(0.076)</p></td>
+</tr>
+<tr class="odd">
+<td>Constant</td>
+<td class="n"><p>0.761</p>
+<p>(0.305)*</p></td>
+<td class="n"><p>1.300</p>
+<p>(0.187)***</p></td>
+<td class="n"><p>0.811</p>
+<p>(0.308)**</p></td>
+</tr>
+<tr class="even">
+<td>N (country-years)</td>
+<td class="n">1,013</td>
+<td class="n">1,013</td>
+<td class="n">1,008</td>
+</tr>
+<tr class="odd">
+<td>Countries</td>
+<td class="n">114</td>
+<td class="n">114</td>
+<td class="n">114</td>
+</tr>
+<tr class="even">
+<td>Wald χ²</td>
+<td class="n">1,976.10*** (15)</td>
+<td class="n">2,485.57*** (18)</td>
+<td class="n">1,104.18*** (19)</td>
+</tr>
+<tr class="odd">
+<td>R²</td>
+<td class="n">0.642</td>
+<td class="n">0.655</td>
+<td class="n">0.647</td>
+</tr>
+<tr class="even">
+<td>Adjusted R²</td>
+<td class="n">0.636</td>
+<td class="n">0.648</td>
+<td class="n">0.640</td>
+</tr>
+</tbody>
+</table></div>
+<p class="note">Standard errors in parentheses. Model 2 is the full model from Table 3. Model 3 estimates the full model by ordinary least squares, without the AR(1) term, with heteroskedastic panel-corrected standard errors; it is the model used for the diagnostic tests in the Data and Methods section and Table A3. Model 4 replaces government effectiveness with the Corruption Perceptions Index, the democracy index with regime type (closed autocracy is the base), and pegged currency with pegs to the US dollar. Dependent variable is the price of gasoline in US dollars per liter. *p&lt;.05; **p&lt;.01; ***p&lt;.001 (two-tailed). Wald χ² degrees of freedom in parentheses.</p>
+<p>The robustness checks support the main results. A national oil company, government effectiveness (or the corruption measure in its place), and democracy (or regime type in its place) keep the same sign and remain significant in every model. Net importer status is significant only in Model 3, which does not correct for serial correlation. A peg to the US dollar is negative and significant in Model 4, the opposite of the direction predicted by Hypothesis 7.</p>
+<p class="caption">Table A3. Diagnostic tests</p>
+<div class="tablewrap"><table>
+<colgroup>
+<col style="width: 40%"/>
+<col style="width: 30%"/>
+<col style="width: 30%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Test</strong></th>
+<th class="n"><strong>Result</strong></th>
+<th><strong>Interpretation</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Skewness and kurtosis of the price of gasoline</td>
+<td>0.120; 2.500</td>
+<td>Close to normal</td>
+</tr>
+<tr class="even">
+<td>Shapiro-Wilk test, price of gasoline</td>
+<td>W = 0.992, p &lt; .001</td>
+<td>Small departure from normality; expected with 1,327 observations</td>
+</tr>
+<tr class="odd">
+<td>Shapiro-Wilk test, residuals of the full model (OLS)</td>
+<td>W = 0.985, p &lt; .001</td>
+<td>Residuals close to normal</td>
+</tr>
+<tr class="even">
+<td>Breusch-Pagan test</td>
+<td class="n">χ²(1) = 24.640, p &lt; .001</td>
+<td>Heteroskedasticity present</td>
+</tr>
+<tr class="odd">
+<td>Levene test of residuals by country</td>
+<td>W0 = 2.950, p &lt; .001</td>
+<td>Error size differs across countries; supports panel-corrected standard errors</td>
+</tr>
+<tr class="even">
+<td>Regression of residual on previous year's residual</td>
+<td>b = 0.886, p &lt; .001</td>
+<td>Strong serial correlation; supports AR(1) correction</td>
+</tr>
+<tr class="odd">
+<td>Highest variance inflation factor</td>
+<td>8.130 (log GDP per capita); mean 2.570</td>
+<td>No severe multicollinearity</td>
+</tr>
+<tr class="even">
+<td>Joint test of region indicators (Model 2)</td>
+<td class="n">χ²(6) = 192.060, p &lt; .001</td>
+<td>Regions differ significantly</td>
+</tr>
+</tbody>
+</table></div>
+<p class="caption">Table A4. Correlations between the price of gasoline and the control variables</p>
+<div class="tablewrap"><table>
+<colgroup>
+<col style="width: 52%"/>
+<col style="width: 47%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Control variable</strong></th>
+<th class="n"><strong>Correlation with price of gasoline</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Log GDP per capita</td>
+<td class="n">0.257*</td>
+</tr>
+<tr class="even">
+<td>World gasoline price</td>
+<td class="n">0.264*</td>
+</tr>
+<tr class="odd">
+<td>Under major sanctions</td>
+<td class="n">−0.183*</td>
+</tr>
+<tr class="even">
+<td>Log refining capacity</td>
+<td class="n">−0.043</td>
+</tr>
+<tr class="odd">
+<td>Currency depreciation</td>
+<td class="n">−0.146*</td>
+</tr>
+</tbody>
+</table></div>
+<p class="note">Note: * Indicates significance at the .05 level. The highest correlation between a control and a hypothesis variable is between log GDP per capita and government effectiveness (r = 0.817).</p>
+</section>
+<section data-id="appendix/appendix-b" class="pane" data-group="appendix" data-title="Appendix B" hidden>
+<h2>Appendix B</h2>
+<p class="subtitle">Variables Tested Separately and Additional Hypotheses</p>
+<p>This appendix reports two sets of supplementary results. The first part reports Models 5, 6, 7, and 8, which test each of the four hypothesis variables separately with all controls included. The second part reports the literature, theory, hypotheses, measures, and results for three variables that were tested as hypotheses but were not supported in the full model: election timing, net importer status, and currency regime. All three remain in Models 1 and 2 in Table 3, where they serve as controls, and Models 9, 10, and 11 test each of them separately.</p>
+<h3>Hypothesis Variables Tested Separately</h3>
+<p>Table B1 reports Models 5, 6, 7, and 8, which test each hypothesis separately with all controls included. All four hypothesis variables are statistically significant on their own. Government effectiveness is positive and significant (b = 0.010, p &lt; .001), so a 10-point increase on its 100-point scale is associated with a price about 10 cents per liter higher. Price regulation is negative and significant (b = −0.149, p = .004), as is a national oil company (b = −0.363, p &lt; .001). The democracy index is positive and significant (b = 0.508, p &lt; .001). The adjusted R² of these models ranges from 0.583 to 0.610, with the highest for Model 7, which includes a national oil company.</p>
+<p class="caption">Table B1. Predictors of the Price of Gasoline, Hypothesis Variables Tested Separately, 2016–2025</p>
+<div class="tablewrap"><table style="width:100%;">
+<colgroup>
+<col style="width: 37%"/>
+<col style="width: 15%"/>
+<col style="width: 15%"/>
+<col style="width: 15%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th class="n"><strong>Model 5</strong></th>
+<th class="n"><strong>Model 6</strong></th>
+<th class="n"><strong>Model 7</strong></th>
+<th class="n"><strong>Model 8</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em><u>Independent Variables</u></em></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Government effectiveness</td>
+<td class="n"><p>0.010</p>
+<p>(0.003)***</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Price regulation</td>
+<td></td>
+<td class="n"><p>−0.149</p>
+<p>(0.052)**</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>National oil company</td>
+<td></td>
+<td></td>
+<td class="n"><p>−0.363</p>
+<p>(0.059)***</p></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Democracy index</td>
+<td></td>
+<td></td>
+<td></td>
+<td class="n"><p>0.508</p>
+<p>(0.116)***</p></td>
+</tr>
+<tr class="even">
+<td><em><u>Control Variables</u></em></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Log GDP per capita</td>
+<td class="n"><p>−0.071</p>
+<p>(0.036)</p></td>
+<td class="n"><p>0.067</p>
+<p>(0.026)*</p></td>
+<td class="n"><p>0.083</p>
+<p>(0.025)**</p></td>
+<td class="n"><p>0.017</p>
+<p>(0.023)</p></td>
+</tr>
+<tr class="even">
+<td>World gasoline price</td>
+<td class="n"><p>0.692</p>
+<p>(0.074)***</p></td>
+<td class="n"><p>0.681</p>
+<p>(0.070)***</p></td>
+<td class="n"><p>0.677</p>
+<p>(0.069)***</p></td>
+<td class="n"><p>0.702</p>
+<p>(0.074)***</p></td>
+</tr>
+<tr class="odd">
+<td>Under major sanctions</td>
+<td class="n"><p>−0.011</p>
+<p>(0.015)</p></td>
+<td class="n"><p>−0.031</p>
+<p>(0.017)</p></td>
+<td class="n"><p>−0.014</p>
+<p>(0.015)</p></td>
+<td class="n"><p>−0.019</p>
+<p>(0.015)</p></td>
+</tr>
+<tr class="even">
+<td>Log refining capacity</td>
+<td class="n"><p>−0.008</p>
+<p>(0.003)**</p></td>
+<td class="n"><p>−0.011</p>
+<p>(0.003)***</p></td>
+<td class="n"><p>0.006</p>
+<p>(0.002)**</p></td>
+<td class="n"><p>−0.007</p>
+<p>(0.004)</p></td>
+</tr>
+<tr class="odd">
+<td>Currency depreciation</td>
+<td class="n"><p>−0.191</p>
+<p>(0.064)**</p></td>
+<td class="n"><p>−0.221</p>
+<p>(0.064)**</p></td>
+<td class="n"><p>−0.211</p>
+<p>(0.060)***</p></td>
+<td class="n"><p>−0.209</p>
+<p>(0.066)**</p></td>
+</tr>
+<tr class="even">
+<td><em><u>Region (base: Europe &amp; Central Asia)</u></em></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>North America</td>
+<td class="n"><p>−0.532</p>
+<p>(0.195)**</p></td>
+<td class="n"><p>−0.459</p>
+<p>(0.192)*</p></td>
+<td class="n"><p>−0.557</p>
+<p>(0.178)**</p></td>
+<td class="n"><p>−0.505</p>
+<p>(0.181)**</p></td>
+</tr>
+<tr class="even">
+<td>Latin America &amp; Caribbean</td>
+<td class="n"><p>−0.278</p>
+<p>(0.033)***</p></td>
+<td class="n"><p>−0.244</p>
+<p>(0.035)***</p></td>
+<td class="n"><p>−0.144</p>
+<p>(0.030)***</p></td>
+<td class="n"><p>−0.387</p>
+<p>(0.049)***</p></td>
+</tr>
+<tr class="odd">
+<td>Middle East &amp; North Africa</td>
+<td class="n"><p>−0.620</p>
+<p>(0.059)***</p></td>
+<td class="n"><p>−0.570</p>
+<p>(0.052)***</p></td>
+<td class="n"><p>−0.487</p>
+<p>(0.049)***</p></td>
+<td class="n"><p>−0.496</p>
+<p>(0.046)***</p></td>
+</tr>
+<tr class="even">
+<td>South Asia</td>
+<td class="n"><p>−0.379</p>
+<p>(0.061)***</p></td>
+<td class="n"><p>−0.175</p>
+<p>(0.075)*</p></td>
+<td class="n"><p>−0.247</p>
+<p>(0.053)***</p></td>
+<td class="n"><p>−0.357</p>
+<p>(0.062)***</p></td>
+</tr>
+<tr class="odd">
+<td>East Asia &amp; Pacific</td>
+<td class="n"><p>−0.452</p>
+<p>(0.042)***</p></td>
+<td class="n"><p>−0.342</p>
+<p>(0.035)***</p></td>
+<td class="n"><p>−0.271</p>
+<p>(0.028)***</p></td>
+<td class="n"><p>−0.356</p>
+<p>(0.033)***</p></td>
+</tr>
+<tr class="even">
+<td>Sub-Saharan Africa</td>
+<td class="n"><p>−0.274</p>
+<p>(0.086)**</p></td>
+<td class="n"><p>−0.157</p>
+<p>(0.074)*</p></td>
+<td class="n"><p>−0.014</p>
+<p>(0.060)</p></td>
+<td class="n"><p>−0.246</p>
+<p>(0.086)**</p></td>
+</tr>
+<tr class="odd">
+<td>Constant</td>
+<td class="n"><p>1.231</p>
+<p>(0.287)***</p></td>
+<td class="n"><p>0.536</p>
+<p>(0.263)*</p></td>
+<td class="n"><p>0.194</p>
+<p>(0.249)</p></td>
+<td class="n"><p>0.638</p>
+<p>(0.238)**</p></td>
+</tr>
+<tr class="even">
+<td>N (country-years)</td>
+<td class="n">1,163</td>
+<td class="n">1,143</td>
+<td class="n">1,163</td>
+<td class="n">1,127</td>
+</tr>
+<tr class="odd">
+<td>Countries</td>
+<td class="n">123</td>
+<td class="n">121</td>
+<td class="n">123</td>
+<td class="n">119</td>
+</tr>
+<tr class="even">
+<td>Wald χ² (12)</td>
+<td class="n">805.21***</td>
+<td class="n">599.13***</td>
+<td class="n">722.16***</td>
+<td class="n">2,042.57***</td>
+</tr>
+<tr class="odd">
+<td>R²</td>
+<td class="n">0.603</td>
+<td class="n">0.587</td>
+<td class="n">0.614</td>
+<td class="n">0.612</td>
+</tr>
+<tr class="even">
+<td>Adjusted R²</td>
+<td class="n">0.599</td>
+<td class="n">0.583</td>
+<td class="n">0.610</td>
+<td class="n">0.607</td>
+</tr>
+</tbody>
+</table></div>
+<p class="note">Panel-corrected standard errors in parentheses. Prais–Winsten regression with a common AR(1) term. Dependent variable is the price of gasoline in US dollars per liter. *p&lt;.05; **p&lt;.01; ***p&lt;.001 (two-tailed). Models 9, 10, and 11 test the additional variables and are reported in Table B4.</p>
+<h3>Additional Hypotheses</h3>
+<h4>Literature and Theory</h4>
+<p>Election timing is a further form of government shielding, and it captures when shielding is most likely. Cross-national and subnational studies find that governments expand fuel support and cut fuel taxes before elections, particularly when prices are high (Klomp 2020; Adhikari, King, and Vadlamannati 2026), and that pump prices fall as elections approach where state capacity is low and races are uncertain (Fails 2025). One case study dissents, arguing that where prices are deregulated, governments have little practical ability to deliver on promises of cheaper fuel (Yeboah-Assiamah, Kundi, and Asamoah 2024). This paper defines election timing as a national election held in a given year, which separates the timing of shielding from its tools.</p>
+<p>Net importer status is the first economic explanation. Where a country produces most of its own gasoline, domestic refiners rather than imports set the price, and governments of producing countries often share resource wealth with citizens through cheap fuel (Cheon, Urpelainen, and Lackner 2013; Fattouh and El-Katiri 2013); a shift from exporter to importer can also change how a government prices fuel (Ichsan, Lockwood, and Ramadhani 2022). Where imports are the marginal supply, the full world cost of the fuel should reach the pump. Research diverges on whether supply conditions matter for gasoline specifically, since some evidence finds that they shape the incidence of diesel taxes but not of gasoline taxes (Marion and Muehlegger 2011). This paper defines net importer status by whether a country's gasoline imports exceed its exports by value.</p>
+<p>Currency regime is the second economic explanation. Because oil and most traded goods are priced in US dollars, a currency that loses value raises the local cost of imported fuel, but retail prices set in local currency adjust only partly and with a delay, so the price consumers pay falls when measured in dollars (Goldberg and Knetter 1997; Campa and Goldberg 2005; Gopinath et al. 2020), and depreciation reduces how fully world fuel prices reach the pump (Kpodar and Imam 2021). A pegged currency, one held fixed to another currency such as the US dollar or the euro, removes much of this movement, keeping the dollar price of fuel steadier and higher. The literature disagrees on how to classify regimes, since many countries that claim to float in fact manage their exchange rates, and many pegs eventually break (Calvo and Reinhart 2002; Ilzetzki, Reinhart, and Rogoff 2019). This paper therefore defines currency regime by observed behavior rather than official declarations, coding a currency as pegged when it is fixed to, or tightly managed against, another currency; pegs to the US dollar specifically serve as an alternative.</p>
+<h4>Hypotheses</h4>
+<p class="hyp"><em>Hypothesis 5: Given a national election, we expect a decrease in the price of gasoline.</em></p>
+<p>The fifth hypothesis concerns the timing of shielding. Fuel prices are visible to nearly every voter, and governments facing an election have strong incentives to prevent them from rising. In an election year, governments should be more willing to hold prices down, delay increases, or cut fuel taxes. The price of gasoline should therefore be lower in years when a national election is held.</p>
+<p class="hyp"><em>Hypothesis 6: Given net importer status, we expect an increase in the price of gasoline.</em></p>
+<p>The sixth hypothesis is economic and concerns the structure of the domestic fuel market. In countries that import more gasoline than they export, imports are the marginal source of supply, and the full world cost of the fuel should reach the pump. In countries that meet most of their needs through domestic refining, governments are more likely to share resource wealth through cheap fuel. The price of gasoline should therefore be higher in net importing countries.</p>
+<p class="hyp"><em>Hypothesis 7: Given a pegged currency, we expect an increase in the price of gasoline.</em></p>
+<p>The final hypothesis is also economic and concerns the structure of the currency. Where a currency floats and loses value, the dollar price of fuel sold in local currency falls, because retail prices adjust only partly and slowly. A pegged currency removes much of this movement. The price of gasoline, measured in dollars, should therefore be higher where the currency is pegged.</p>
+<h4>Data and Measures</h4>
+<p>Election timing comes from the Varieties of Democracy project (Coppedge et al. 2026) and is coded 1 if a national election was held that year. Net importer status comes from the UN Comtrade Database (United Nations 2026), which reports the value of each country's gasoline imports and exports each year, and a country is coded 1 if its imports exceed its exports by value. Finally, currency regime is measured with the exchange rate classification of Ilzetzki, Reinhart, and Rogoff (2019), which places each currency in a regime each month according to how it actually behaves rather than how its government describes it. A currency is coded 1 if it was held under a hard peg, a narrow band, or a crawling peg in any month that year, and pegs with the US dollar as the anchor serve as an alternative.</p>
+<h4>Results</h4>
+<p>In the full sample, 30 percent of country-years fall in years with a national election, 77 percent in net importing countries, and 72 percent in years with a pegged currency (Table B2).</p>
+<p class="caption">Table B2. Summary statistics for the additional variables, 2015–2025</p>
+<div class="tablewrap"><table>
+<colgroup>
+<col style="width: 40%"/>
+<col style="width: 11%"/>
+<col style="width: 11%"/>
+<col style="width: 11%"/>
+<col style="width: 11%"/>
+<col style="width: 11%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Variable</strong></th>
+<th class="n"><strong>N</strong></th>
+<th class="n"><strong>Mean</strong></th>
+<th class="n"><strong>Std. Dev.</strong></th>
+<th class="n"><strong>Min</strong></th>
+<th class="n"><strong>Max</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>National election</td>
+<td class="n">1,859</td>
+<td class="n">0.296</td>
+<td class="n">0.457</td>
+<td class="n">0.000</td>
+<td class="n">1.000</td>
+</tr>
+<tr class="even">
+<td>Net gasoline importer</td>
+<td class="n">1,775</td>
+<td class="n">0.774</td>
+<td class="n">0.419</td>
+<td class="n">0.000</td>
+<td class="n">1.000</td>
+</tr>
+<tr class="odd">
+<td>Pegged currency</td>
+<td class="n">2,134</td>
+<td class="n">0.716</td>
+<td class="n">0.451</td>
+<td class="n">0.000</td>
+<td class="n">1.000</td>
+</tr>
+</tbody>
+</table></div>
+<p class="note">Note: Unit of analysis is the country-year. The number of observations differs by variable because of source coverage.</p>
+<p>Table B3 reports the correlations among the price of gasoline and all seven variables tested. Before any controls, net importer status is negatively correlated with the price of gasoline (r = −0.192), while a national election (r = 0.007) and a pegged currency (r = 0.022) are not correlated with it.</p>
+<p class="caption">Table B3. Pairwise correlations between the price of gasoline and all variables tested</p>
+<div class="tablewrap"><table>
+<colgroup>
+<col style="width: 29%"/>
+<col style="width: 8%"/>
+<col style="width: 8%"/>
+<col style="width: 8%"/>
+<col style="width: 8%"/>
+<col style="width: 8%"/>
+<col style="width: 8%"/>
+<col style="width: 8%"/>
+<col style="width: 8%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th class="n n"><strong>1</strong></th>
+<th class="n n"><strong>2</strong></th>
+<th class="n n"><strong>3</strong></th>
+<th class="n n"><strong>4</strong></th>
+<th class="n n"><strong>5</strong></th>
+<th class="n n"><strong>6</strong></th>
+<th class="n n"><strong>7</strong></th>
+<th class="n n"><strong>8</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. Price of gasoline</td>
+<td class="n">1.000</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2. Government effectiveness</td>
+<td class="n">0.440*</td>
+<td class="n">1.000</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3. Price regulation</td>
+<td class="n">−0.382*</td>
+<td class="n">−0.512*</td>
+<td class="n">1.000</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4. National oil company</td>
+<td class="n">−0.514*</td>
+<td class="n">−0.238*</td>
+<td class="n">0.311*</td>
+<td class="n">1.000</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5. National election</td>
+<td class="n">0.007</td>
+<td class="n">0.050*</td>
+<td class="n">−0.077*</td>
+<td class="n">−0.041</td>
+<td class="n">1.000</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>6. Democracy index</td>
+<td class="n">0.569*</td>
+<td class="n">0.649*</td>
+<td class="n">−0.488*</td>
+<td class="n">−0.318*</td>
+<td class="n">0.042</td>
+<td class="n">1.000</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7. Net gasoline importer</td>
+<td class="n">−0.192*</td>
+<td class="n">−0.283*</td>
+<td class="n">0.273*</td>
+<td class="n">−0.094*</td>
+<td class="n">−0.082*</td>
+<td class="n">−0.108*</td>
+<td class="n">1.000</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8. Pegged currency</td>
+<td class="n">0.022</td>
+<td class="n">−0.007</td>
+<td class="n">0.130*</td>
+<td class="n">−0.138*</td>
+<td class="n">0.011</td>
+<td class="n">−0.066*</td>
+<td class="n">−0.009</td>
+<td class="n">1.000</td>
+</tr>
+</tbody>
+</table></div>
+<p class="note">Note: * Indicates later significance at the .05 level. Correlations with the control variables are reported in Table A4 in the appendix.</p>
+<p>Table B4 reports Models 9, 10, and 11, which test each of these variables separately with all controls included. None is statistically significant on its own: a national election (b = −0.008, p = .167), net importer status (b = −0.000, p = 1.000), and a pegged currency (b = −0.031, p = .220). The adjusted R² of these models ranges from 0.573 to 0.581.</p>
+<p class="caption">Table B4. Predictors of the Price of Gasoline, Additional Variables Tested Separately, 2016–2025</p>
+<div class="tablewrap"><table>
+<colgroup>
+<col style="width: 44%"/>
+<col style="width: 18%"/>
+<col style="width: 18%"/>
+<col style="width: 18%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th class="n"><strong>Model 9</strong></th>
+<th class="n"><strong>Model 10</strong></th>
+<th class="n"><strong>Model 11</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em><u>Independent Variables</u></em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>National election</td>
+<td class="n"><p>−0.008</p>
+<p>(0.006)</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Net gasoline importer</td>
+<td></td>
+<td class="n"><p>−0.000</p>
+<p>(0.021)</p></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Pegged currency</td>
+<td></td>
+<td></td>
+<td class="n"><p>−0.031</p>
+<p>(0.025)</p></td>
+</tr>
+<tr class="odd">
+<td><em><u>Control Variables</u></em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Log GDP per capita</td>
+<td class="n"><p>0.082</p>
+<p>(0.027)**</p></td>
+<td class="n"><p>0.081</p>
+<p>(0.023)***</p></td>
+<td class="n"><p>0.076</p>
+<p>(0.027)**</p></td>
+</tr>
+<tr class="odd">
+<td>World gasoline price</td>
+<td class="n"><p>0.687</p>
+<p>(0.071)***</p></td>
+<td class="n"><p>0.703</p>
+<p>(0.073)***</p></td>
+<td class="n"><p>0.689</p>
+<p>(0.071)***</p></td>
+</tr>
+<tr class="even">
+<td>Under major sanctions</td>
+<td class="n"><p>−0.036</p>
+<p>(0.018)*</p></td>
+<td class="n"><p>−0.038</p>
+<p>(0.019)*</p></td>
+<td class="n"><p>−0.036</p>
+<p>(0.018)*</p></td>
+</tr>
+<tr class="odd">
+<td>Log refining capacity</td>
+<td class="n"><p>−0.010</p>
+<p>(0.004)**</p></td>
+<td class="n"><p>−0.009</p>
+<p>(0.003)**</p></td>
+<td class="n"><p>−0.012</p>
+<p>(0.003)***</p></td>
+</tr>
+<tr class="even">
+<td>Currency depreciation</td>
+<td class="n"><p>−0.213</p>
+<p>(0.066)**</p></td>
+<td class="n"><p>−0.212</p>
+<p>(0.071)**</p></td>
+<td class="n"><p>−0.219</p>
+<p>(0.067)**</p></td>
+</tr>
+<tr class="odd">
+<td><em><u>Region (base: Europe &amp; Central Asia)</u></em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>North America</td>
+<td class="n"><p>−0.455</p>
+<p>(0.181)*</p></td>
+<td class="n"><p>−0.452</p>
+<p>(0.167)**</p></td>
+<td class="n"><p>−0.466</p>
+<p>(0.180)*</p></td>
+</tr>
+<tr class="odd">
+<td>Latin America &amp; Caribbean</td>
+<td class="n"><p>−0.345</p>
+<p>(0.040)***</p></td>
+<td class="n"><p>−0.306</p>
+<p>(0.038)***</p></td>
+<td class="n"><p>−0.330</p>
+<p>(0.043)***</p></td>
+</tr>
+<tr class="even">
+<td>Middle East &amp; North Africa</td>
+<td class="n"><p>−0.672</p>
+<p>(0.069)***</p></td>
+<td class="n"><p>−0.692</p>
+<p>(0.057)***</p></td>
+<td class="n"><p>−0.698</p>
+<p>(0.066)***</p></td>
+</tr>
+<tr class="odd">
+<td>South Asia</td>
+<td class="n"><p>−0.374</p>
+<p>(0.060)***</p></td>
+<td class="n"><p>−0.406</p>
+<p>(0.071)***</p></td>
+<td class="n"><p>−0.390</p>
+<p>(0.060)***</p></td>
+</tr>
+<tr class="even">
+<td>East Asia &amp; Pacific</td>
+<td class="n"><p>−0.418</p>
+<p>(0.037)***</p></td>
+<td class="n"><p>−0.404</p>
+<p>(0.037)***</p></td>
+<td class="n"><p>−0.422</p>
+<p>(0.035)***</p></td>
+</tr>
+<tr class="odd">
+<td>Sub-Saharan Africa</td>
+<td class="n"><p>−0.236</p>
+<p>(0.083)**</p></td>
+<td class="n"><p>−0.226</p>
+<p>(0.075)**</p></td>
+<td class="n"><p>−0.266</p>
+<p>(0.082)**</p></td>
+</tr>
+<tr class="even">
+<td>Constant</td>
+<td class="n"><p>0.338</p>
+<p>(0.252)</p></td>
+<td class="n"><p>0.337</p>
+<p>(0.219)</p></td>
+<td class="n"><p>0.446</p>
+<p>(0.271)</p></td>
+</tr>
+<tr class="odd">
+<td>N (country-years)</td>
+<td class="n">1,107</td>
+<td class="n">1,075</td>
+<td class="n">1,147</td>
+</tr>
+<tr class="even">
+<td>Countries</td>
+<td class="n">117</td>
+<td class="n">122</td>
+<td class="n">121</td>
+</tr>
+<tr class="odd">
+<td>Wald χ² (12)</td>
+<td class="n">500.07***</td>
+<td class="n">673.79***</td>
+<td class="n">659.45***</td>
+</tr>
+<tr class="even">
+<td>R²</td>
+<td class="n">0.585</td>
+<td class="n">0.578</td>
+<td class="n">0.585</td>
+</tr>
+<tr class="odd">
+<td>Adjusted R²</td>
+<td class="n">0.581</td>
+<td class="n">0.573</td>
+<td class="n">0.581</td>
+</tr>
+</tbody>
+</table></div>
+<p class="note">Panel-corrected standard errors in parentheses. Prais–Winsten regression with a common AR(1) term. Dependent variable is the price of gasoline in US dollars per liter. *p&lt;.05; **p&lt;.01; ***p&lt;.001 (two-tailed).</p>
+<h4>Findings</h4>
+<p>A national election does not lower the price of gasoline, so Hypothesis 5 is not supported. The coefficient is negative in every model but never significant. This is consistent with work finding that election effects on fuel prices are conditional, appearing only where state capacity is low and races are uncertain (Fails 2025), only at very high or very low levels of fuel demand (Klomp 2020), or only where governments control prices (Yeboah-Assiamah, Kundi, and Asamoah 2024). A yearly measure may also be too blunt, since price relief timed in the months before an election would be averaged across the whole year.</p>
+<p>Net importer status has no effect on the price of gasoline, so Hypothesis 6 is not supported. Net importers have lower prices before any controls, but the difference disappears once national income is taken into account. This is consistent with evidence that supply conditions shape the incidence of fuel taxes for diesel but not for gasoline (Marion and Muehlegger 2011). It also suggests that the producer effect found in the literature (Cheon, Urpelainen, and Lackner 2013; Fattouh and El-Katiri 2013) operates through state ownership of the oil sector and regional patterns of subsidy rather than through a country's trade balance in gasoline.</p>
+<p>A pegged currency does not raise the price of gasoline, so Hypothesis 7 is not supported. Currency depreciation, by contrast, lowers the dollar price of gasoline in the full model (Table 3). It also fits the argument that official exchange rate labels can misstate how currencies behave (Calvo and Reinhart 2002). For the price of gasoline, what a currency does appears to matter more than the regime it is placed in.</p>
+</section>
+<section data-id="codebook" class="pane" data-group="codebook" data-title="Codebook" hidden>
+<h2>Codebook</h2>
+<p>Every variable in the analysis, with how it is measured and where the data come from. This is Table A1 of the paper (Variable measures and sources). Unit of analysis is the country-year, 2016–2025.</p><div class="vars"><div class="var dv"><div class="vh"><h3>Price of gasoline</h3><span class="tag">Dependent variable</span></div><dl><dt>Measure</dt><dd>Yearly average retail price, US dollars per liter (local price ÷ local currency per US dollar)</dd><dt>Source</dt><dd>World Bank Global Fuel Prices Database; IMF exchange rates</dd></dl></div>
+<div class="var hv"><div class="vh"><h3>Government effectiveness</h3><span class="tag">Hypothesis 1</span></div><dl><dt>Measure</dt><dd>Government effectiveness score, 0–100</dd><dt>Source</dt><dd>Worldwide Governance Indicators</dd></dl></div>
+<div class="var hv"><div class="vh"><h3>Price regulation</h3><span class="tag">Hypothesis 2</span></div><dl><dt>Measure</dt><dd>1 = retail fuel prices regulated in any year 2021–2024</dd><dt>Source</dt><dd>World Bank Global Fuel Subsidies and Price Control Measures Database</dd></dl></div>
+<div class="var hv"><div class="vh"><h3>National oil company</h3><span class="tag">Hypothesis 3</span></div><dl><dt>Measure</dt><dd>1 = country listed in the database</dd><dt>Source</dt><dd>Natural Resource Governance Institute, National Oil Company Database</dd></dl></div>
+<div class="var hv"><div class="vh"><h3>National election</h3><span class="tag">Hypothesis 5 · Appendix B</span></div><dl><dt>Measure</dt><dd>1 = national election held that year</dd><dt>Source</dt><dd>V-Dem v16</dd></dl></div>
+<div class="var hv"><div class="vh"><h3>Democracy index</h3><span class="tag">Hypothesis 4</span></div><dl><dt>Measure</dt><dd>Electoral democracy index, 0–1</dd><dt>Source</dt><dd>V-Dem v16</dd></dl></div>
+<div class="var hv"><div class="vh"><h3>Net gasoline importer</h3><span class="tag">Hypothesis 6 · Appendix B</span></div><dl><dt>Measure</dt><dd>1 = gasoline imports exceed exports by value</dd><dt>Source</dt><dd>UN Comtrade</dd></dl></div>
+<div class="var hv"><div class="vh"><h3>Pegged currency</h3><span class="tag">Hypothesis 7 · Appendix B</span></div><dl><dt>Measure</dt><dd>1 = hard peg, narrow band, or crawling peg in any month that year</dd><dt>Source</dt><dd>Ilzetzki, Reinhart, and Rogoff (2019)</dd></dl></div>
+<div class="var ctl"><div class="vh"><h3>Log GDP per capita</h3><span class="tag">Control variable</span></div><dl><dt>Measure</dt><dd>Natural log of GDP per capita, PPP, constant international dollars</dd><dt>Source</dt><dd>World Development Indicators</dd></dl></div>
+<div class="var ctl"><div class="vh"><h3>World gasoline price</h3><span class="tag">Control variable</span></div><dl><dt>Measure</dt><dd>US Gulf Coast spot price, US dollars per liter, same months as pump price</dd><dt>Source</dt><dd>U.S. Energy Information Administration</dd></dl></div>
+<div class="var ctl"><div class="vh"><h3>Under major sanctions</h3><span class="tag">Control variable</span></div><dl><dt>Measure</dt><dd>1 = active US, EU, or UN sanction that year</dd><dt>Source</dt><dd>Global Sanctions Data Base, Release 5</dd></dl></div>
+<div class="var ctl"><div class="vh"><h3>Log refining capacity</h3><span class="tag">Control variable</span></div><dl><dt>Measure</dt><dd>Natural log of (1 + refining capacity in barrels per day)</dd><dt>Source</dt><dd>World Bank Global Fuel Subsidies and Price Control Measures Database</dd></dl></div>
+<div class="var ctl"><div class="vh"><h3>Currency depreciation</h3><span class="tag">Control variable</span></div><dl><dt>Measure</dt><dd>Change in the log of local currency per US dollar from the previous year</dd><dt>Source</dt><dd>IMF exchange rates</dd></dl></div>
+<div class="var ctl"><div class="vh"><h3>Region</h3><span class="tag">Control variable</span></div><dl><dt>Measure</dt><dd>Seven World Bank regions; Malta grouped with Europe and Central Asia</dd><dt>Source</dt><dd>World Bank</dd></dl></div>
+<div class="var alt"><div class="vh"><h3>Corruption Perceptions Index</h3><span class="tag">Alternative measure</span></div><dl><dt>Measure</dt><dd>Score, 0–100</dd><dt>Source</dt><dd>Transparency International</dd></dl></div>
+<div class="var alt"><div class="vh"><h3>Regime type</h3><span class="tag">Alternative measure</span></div><dl><dt>Measure</dt><dd>0 = closed autocracy, 1 = electoral autocracy, 2 = electoral democracy, 3 = liberal democracy</dd><dt>Source</dt><dd>V-Dem v16</dd></dl></div>
+<div class="var alt"><div class="vh"><h3>Pegged to US dollar</h3><span class="tag">Alternative measure</span></div><dl><dt>Measure</dt><dd>1 = pegged with the US dollar as anchor</dd><dt>Source</dt><dd>Ilzetzki, Reinhart, and Rogoff (2019)</dd></dl></div></div>
+</section>
+      <div class="pager">
+        <button class="prev" type="button"><small>← Previous</small><span></span></button>
+        <button class="next" type="button"><small>Next →</small><span></span></button>
+      </div>
+    </div>
+  </main>
+</div>
+</div>
+<select id="opt-paper" hidden>
+<option value="paper/abstract">01 · Abstract</option>
+<option value="paper/introduction">02 · Introduction</option>
+<option value="paper/literature-review">03 · Literature Review</option>
+<option value="paper/hypotheses">04 · Hypotheses</option>
+<option value="paper/data-and-methods">05 · Data and Methods</option>
+<option value="paper/results">06 · Results</option>
+<option value="paper/findings">07 · Findings</option>
+<option value="paper/conclusion">08 · Conclusion</option>
+<option value="paper/references">09 · References</option>
+</select>
+<select id="opt-appendix" hidden>
+<option value="appendix/appendix-a">01 · Appendix A</option>
+<option value="appendix/appendix-b">02 · Appendix B</option>
+</select>
+<script>
+(function () {
+  var NAMES = { paper: 'The Paper', appendix: 'The Appendix', codebook: 'The Codebook' };
+  var home = document.getElementById('view-home');
+  var doc = document.getElementById('view-doc');
+  var panes = Array.prototype.slice.call(document.querySelectorAll('.pane'));
+  var sel = document.getElementById('jump');
+  var prev = document.querySelector('.pager .prev');
+  var next = document.querySelector('.pager .next');
+  var curGroup = null;
+
+  function inGroup(g) { return panes.filter(function (p) { return p.dataset.group === g; }); }
+
+  panes.forEach(function (p) {
+    var list = inGroup(p.dataset.group), i = list.indexOf(p);
+    var w = document.createElement('p');
+    w.className = 'where';
+    w.textContent = NAMES[p.dataset.group] + (list.length > 1 ? ' · ' + (i + 1) + ' of ' + list.length : '');
+    p.insertBefore(w, p.firstChild);
+  });
+
+  function route() {
+    var id = decodeURIComponent(location.hash.slice(1));
+    var pane = panes.filter(function (p) { return p.dataset.id === id; })[0];
+    if (!pane && (id === 'paper' || id === 'appendix')) pane = inGroup(id)[0];
+    if (!pane) {
+      home.hidden = false; doc.hidden = true;
+      document.title = 'Politics at the Pump · Grace Ritzenthaler';
+      window.scrollTo(0, 0);
+      return;
+    }
+    home.hidden = true; doc.hidden = false;
+    var g = pane.dataset.group, list = inGroup(g), i = list.indexOf(pane);
+    if (g !== curGroup) {
+      curGroup = g;
+      ['paper', 'appendix', 'codebook'].forEach(function (k) { document.getElementById('nav-' + k).hidden = k !== g; });
+      var src = document.getElementById('opt-' + g);
+      sel.innerHTML = src ? src.innerHTML : '<option value="codebook">Codebook</option>';
+      sel.style.display = list.length > 1 ? '' : 'none';
+      document.getElementById('dtitle').textContent = NAMES[g];
+      document.getElementById('mtitle').textContent = NAMES[g];
+    }
+    panes.forEach(function (p) { p.hidden = p !== pane; });
+    document.querySelectorAll('nav a').forEach(function (a) { a.classList.toggle('active', a.dataset.id === pane.dataset.id); });
+    sel.value = pane.dataset.id;
+    prev.hidden = i <= 0;
+    next.hidden = i >= list.length - 1;
+    if (i > 0) { prev.querySelector('span').textContent = list[i - 1].dataset.title; prev.dataset.to = list[i - 1].dataset.id; }
+    if (i < list.length - 1) { next.querySelector('span').textContent = list[i + 1].dataset.title; next.dataset.to = list[i + 1].dataset.id; }
+    document.querySelector('.pager').style.display = list.length > 1 ? '' : 'none';
+    document.title = pane.dataset.title + ' · Politics at the Pump';
+    window.scrollTo(0, 0);
+  }
+
+  window.addEventListener('hashchange', route);
+  sel.addEventListener('change', function () { location.hash = sel.value; });
+  prev.addEventListener('click', function () { location.hash = prev.dataset.to; });
+  next.addEventListener('click', function () { location.hash = next.dataset.to; });
+  document.addEventListener('keydown', function (e) {
+    if (doc.hidden || e.target.tagName === 'SELECT') return;
+    if (e.key === 'ArrowRight' && !next.hidden) next.click();
+    if (e.key === 'ArrowLeft' && !prev.hidden) prev.click();
+  });
+  route();
+})();
+</script>
+</body>
+</html>
